@@ -1,12 +1,5 @@
 **** carmen sandiego game - find carmen sandiego on the world map with a string of clues to solve leading to different locations? ****
 
-
-
-
-
-
-
-
 git serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
 
 political app of some kind - showing amount of tweets by region or cross-referenced with polls or something?
@@ -23,6 +16,8 @@ deck of cards API -- some sort of online gambling game? not sure how to incorpor
 newsfeed of top x songs, news, music
 
 social media dashboard -- not very innovative, but seems a bit more straightforward to implement
+ 
+<HACKATHON#2 IDEA - YAERI>
 
 dinner party planner -- get recipes from bigoven, pair with songs from the same region (figure that out with the wiki API or something?), youtube videos, news or culture articles (talking points!)
 
@@ -43,6 +38,7 @@ Brewery with the bros: uses Beer Mapping, Uber, and Google street view to find a
 
 
 <HACKATHON#2 IDEA - YAERI>
+
 
 1) What should we eat? APP
 
