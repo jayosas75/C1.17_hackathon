@@ -25,6 +25,12 @@ dinner party planner -- get recipes from bigoven, pair with songs from the same 
 event calendars pulling from meetup? stubhub?
 
 news word cloud?--video word cloud maybe? popular videos by region in a word cloud?
+
+blind date app - find people nearby (use location api) and use eventful to find fun stuff like concerts, and use yelp to find nearby restaurants with good ratings,
+                 to figure out where to go on blind date, it'll be random so the two people get no choice, just preferences
+buy stuff based on weather - like, if it's in the 90's, suggest buying swim gear, if it's in the 50's, suggest buying parkas, weather channel, amazon, paypal, shopzilla, location
+this is not a dating app (aka Friend Zoned) - like the blind date app, but not for romance, just friends forever
+music app - help people find out lyrics to their favorite songs, or find songs based on limited lyrics that they remember, soundcloud, lyricwiki, lyricsfly
  
 <HACKATHON#2 IDEA - YAERI>
 
