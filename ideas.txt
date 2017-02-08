@@ -1,4 +1,4 @@
-serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
+git serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
 carmen sandiego game - find carmen sandiego on the world map with a string of clues to solve leading to different locations?
 political app of some kind - showing amount of tweets by region or cross-referenced with polls or something?
 chatbot of some kind - chatbot of some kind (Watson API?)
