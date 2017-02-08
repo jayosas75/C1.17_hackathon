@@ -12,5 +12,17 @@ social media dashboard -- not very innovative, but seems a bit more straightforw
 dinner party planner -- get recipes from bigoven, pair with songs from the same region (figure that out with the wiki API or something?), youtube videos, news or culture articles (talking points!)
 event calendars pulling from meetup? stubhub?
 news word cloud?--video word cloud maybe? popular videos by region in a word cloud?
+
+
+John-----------------------------------------------
+dinner date with movie and maps: uses yelp, google maps, and fandango to plan a date with directions.
+
+weekend planner: generic travel app that will use Eventful, Expedia, and Yelp.
+
+Brewery with the bros: uses Beer Mapping, Uber, and Google street view to find a brewery, provide you with a picture from stree view and provide a ride from uber.
+
+Netflix and Chill: Uses Netflix API to display a movie. uses Ordrx to order food and uses wine.com to show you good wines and price ranges.
+
+
  
 
