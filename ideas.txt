@@ -1,0 +1,16 @@
+serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
+carmen sandiego game - find carmen sandiego on the world map with a string of clues to solve leading to different locations?
+political app of some kind - showing amount of tweets by region or cross-referenced with polls or something?
+chatbot of some kind - chatbot of some kind (Watson API?)
+twitter haiku/poem generator
+tracking illnesses or something with the cdc
+generate playlists that are x hours long for whatever trip you are taking with appropriate songs or artists for different legs of the trip
+some sort of jackbox-like game using the firebase from last hackathon "name the artist! or something"
+deck of cards API -- some sort of online gambling game? not sure how to incorporate other APIs -- speech recognition for hit/stay?
+newsfeed of top x songs, news, music
+social media dashboard -- not very innovative, but seems a bit more straightforward to implement
+dinner party planner -- get recipes from bigoven, pair with songs from the same region (figure that out with the wiki API or something?), youtube videos, news or culture articles (talking points!)
+event calendars pulling from meetup? stubhub?
+news word cloud?--video word cloud maybe? popular videos by region in a word cloud?
+ 
+
