@@ -1,6 +1,6 @@
-git serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
+**** carmen sandiego game - find carmen sandiego on the world map with a string of clues to solve leading to different locations? ****
 
-carmen sandiego game - find carmen sandiego on the world map with a string of clues to solve leading to different locations?
+git serial killer wall - connect a bunch of different things with string to show useful related news, videos, music, etc? (spell with flickr!)
 
 political app of some kind - showing amount of tweets by region or cross-referenced with polls or something?
 
@@ -10,9 +10,6 @@ twitter haiku/poem generator
 
 tracking illnesses or something with the cdc
 
-generate playlists that are x hours long for whatever trip you are taking with appropriate songs or artists for different legs of the trip
-
-some sort of jackbox-like game using the firebase from last hackathon "name the artist! or something"
 
 deck of cards API -- some sort of online gambling game? not sure how to incorporate other APIs -- speech recognition for hit/stay?
 
@@ -28,17 +25,24 @@ event calendars pulling from meetup? stubhub?
 
 news word cloud?--video word cloud maybe? popular videos by region in a word cloud?
 
+<<<<<<< HEAD
+=======
+blind date app - find people nearby (use location api) and use eventful to find fun stuff like concerts, and use yelp to find nearby restaurants with good ratings,
+                 to figure out where to go on blind date, it'll be random so the two people get no choice, just preferences
+this is not a dating app (aka Friend Zoned) - like the blind date app, but not for romance, just friends forever
+music app - help people find out lyrics to their favorite songs, or find songs based on limited lyrics that they remember, soundcloud, lyricwiki, lyricsfly
+>>>>>>> d734feffb877700010cc05adf49601810b45d2ea
 
 John-----------------------------------------------
-dinner date with movie and maps: uses yelp, google maps, and fandango to plan a date with directions.
 
 weekend planner: generic travel app that will use Eventful, Expedia, and Yelp.
 
 Brewery with the bros: uses Beer Mapping, Uber, and Google street view to find a brewery, provide you with a picture from stree view and provide a ride from uber.
 
-Netflix and Chill: Uses Netflix API to display a movie. uses Ordrx to order food and uses wine.com to show you good wines and price ranges.
 
+<HACKATHON#2 IDEA - YAERI>
 
+<<<<<<< HEAD
 
 blind date app - find people nearby (use location api) and use eventful to find fun stuff like concerts, and use yelp to find nearby restaurants with good ratings,
                  to figure out where to go on blind date, it'll be random so the two people get no choice, just preferences
@@ -47,6 +51,8 @@ this is not a dating app (aka Friend Zoned) - like the blind date app, but not f
 music app - help people find out lyrics to their favorite songs, or find songs based on limited lyrics that they remember, soundcloud, lyricwiki, lyricsfly
 >>>>>>> 60a277e19cfc9035ba79c3195fbd6c9905040348
  
+=======
+>>>>>>> d734feffb877700010cc05adf49601810b45d2ea
 
 1) What should we eat? APP
 
@@ -88,3 +94,12 @@ https://wtfsigfd.com/
 - mark down the places you visited
 - share with others
 - travel information
+
+
+*****buy stuff based on weather - like, if it's in the 90's, suggest buying swim gear, if it's in the 50's, suggest buying parkas, weather channel, amazon, paypal, shopzilla, location
+*****dinner date with movie and maps: uses yelp, google maps, and fandango to plan a date with directions.
+
+**** some sort of jackbox-like game using the firebase from last hackathon "name the artist! or something"
+**** generate playlists that are x hours long for whatever trip you are taking with appropriate songs or artists for different legs of the trip
+*****Netflix and Chili: Uses Netflix API to display a movie. uses Ordrx to order food and uses wine.com to show you good wines and price ranges.
+
