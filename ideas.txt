@@ -19,14 +19,14 @@ deck of cards API -- some sort of online gambling game? not sure how to incorpor
 newsfeed of top x songs, news, music
 
 social media dashboard -- not very innovative, but seems a bit more straightforward to implement
+ 
+<HACKATHON#2 IDEA - YAERI>
 
 dinner party planner -- get recipes from bigoven, pair with songs from the same region (figure that out with the wiki API or something?), youtube videos, news or culture articles (talking points!)
 
 event calendars pulling from meetup? stubhub?
 
 news word cloud?--video word cloud maybe? popular videos by region in a word cloud?
- 
-<HACKATHON#2 IDEA - YAERI>
 
 1) What should we eat? APP
 
