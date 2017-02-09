@@ -1,20 +1,27 @@
 
 body {
-    background-image: url("img/background.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 80vh;
-    width: 90vw;
+    background: url("img/background.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+.fix_body {
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 .map{
     background-color: white;
     font-size: 20vh;
-    width: 54%;
-    height: 86%;
-    margin-left: 34%;
-    margin-top: 8%;
+    width: 44%;
+    height: 74%;
+    left: 34%;
+    top: 8%;
     border: 5px black solid;
+    position: absolute;
 }
 #googleMap{
     width:100%;
