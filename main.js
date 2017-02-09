@@ -205,10 +205,10 @@ function markNextLocation(){
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
         generate_questions(trivia_obj);
-        $('#trivia_div').modal();
+        $('#trivia').modal();
+        startMarkerListener.remove(startMarkerListener);
+        nextMarkerListener.remove(nextMarkerListener);
         startMarker = nextMarker;
-        startMarkerListener.remove();
-        nextMarkerListener.remove();
     });
     itineraryIndex++;
 }
@@ -301,3 +301,31 @@ function didWeFindHer(e){
         $('#lose_div').modal('show');
     }
 }
+
+/**
+ * generateCarmenClues -- pull information from the itinerary to generate carmen clues for the final win
+ */
+
+var carmenCluesArray = [];
+var cluePropertyArray = ['population', 'languages', 'region', 'subregion', 'timezone', 'currency', 'borders', 'topLevelDomain','capital'];
+
+function generateCarmenClues(){
+
+    var clueTemplateArray =[
+        "It seems like the country that Carmen's heading to has a population around " + itinerary[3]['population'] + ".",
+        "It looks like Carmen dropped a scrap of paper. The words on it look like they're in : " + itinerary[3]['languages'] + ".",
+        "It seems like Carmen's heading off somewhere in " + itinerary[3]['region'] + ".",
+        "Hm... it seems like Carmen's heading to somewhere in " + itinerary[3]['subregion'] + ".",
+        "Looks like Carmen dropped her watch. Going by my calculations, her watch is set for " + itinerary[3]['timezone'] + " time zone.",
+        "A few bills fell out of Carmen's pocket! Looks like they are " + itinerary[3]['currency'] + ".",
+        "She dropped a scrap of paper with a country crossed off! Maybe" + itinerary[3]['borders'] + " this is near where she's headed!",
+        "Carmen dropped yet another scrap of paper with a URL on it. I can't quite make out the URL, but the top-level domain is " + itinerary[3]['topLevelDomain'] + "!",
+        "She dropped a tourism brochure. She's headed to " + itinerary[3]['capital'] + "!"];
+
+     for (var q = 0; q < 9 ; q++) {
+         carmenCluesArray[q] = clueTemplateArray[q];
+     }
+    console.log('Carmen Clues! ', carmenCluesArray);
+}
+
+
