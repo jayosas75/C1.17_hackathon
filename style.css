@@ -1,0 +1,18 @@
+.modal-content {
+    background-color: rgba(255, 184, 37, .9);
+    color: red;
+    font-size: 4vmin;
+}
+
+.main, #map {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+#map {
+    width: 100vmin;
+    height: 70vmin;
+    background-color: green;
+}
