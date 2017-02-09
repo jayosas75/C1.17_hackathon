@@ -8,9 +8,19 @@
         <script type="text/javascript" src="https://weglot.com/api/weglot.js"></script>
         <script src="main.js"></script>
         <link rel="stylesheet" href="style.css">
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18&libraries=geometry&callback=createMap"></script>
 
     </head>
+
     <body>
+
+    <header>
+        <h1>Where in the World is Carmen Sandiego?</h1>
+    </header>
+
+    <div class="map">
+        <div id="googleMap"></div>
+    </div>
 
         <div id='instructions_div' class="modal">
             <div class="instructions">
@@ -28,17 +38,7 @@
                 </div>
             </div>
 
-        <header>
-            <h1>Where in the World is Carmen Sandiego?</h1>
-        </header>
-        <div class="main">
-            <div id="map">
-                this is for map
-            </div>
-        </div>
-
         <div id="modals">
-
                 <!-- Modal for Landing Instructions -->
             <button type="button" id="instruction btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#instructions">instructions</button>
 
@@ -68,12 +68,11 @@
 
                     </div>
                 </div>
+
                 <div class="wrong">
                     <img src = "img/cross_rd.png">
                     <img src = "img/cross-bk.png">
-
-
-
+                </div>
 
                     <!-- Modal for Trivia Questions -->
             <button type="button" id="trivia_btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trivia">trivia</button>
