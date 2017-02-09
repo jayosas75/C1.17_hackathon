@@ -192,16 +192,18 @@ function markNextLocation(){
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
 
-    startMarker.addListener('click', function(){
+    var startMarkerListener = startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
-        startMarker = nextMarker;
     });
 
-    nextMarker.addListener('click', function(){
+    var nextMarkerListener = nextMarker.addListener('click', function(){
         console.log('we should be able to a dang modal');
         generate_questions(trivia_obj);
         $('#trivia_div').modal();
-        });
+        startMarker = nextMarker;
+        startMarkerListener.remove();
+        nextMarkerListener.remove();
+    });
     itineraryIndex++;
 }
 
