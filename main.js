@@ -8,7 +8,7 @@ $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
     $('#submit_trivia').click(function(){
-      submit_trivia_hit();
+        submit_trivia_hit();
     });
     input_click_handlers();
     // $('#instructions_div').modal('show');
@@ -53,19 +53,19 @@ function input_click_handlers(){
 
 
 function trivia_ajax_call(){
-        $.ajax({
-            dataType: 'json',
-            url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50&category=22&type=multiple"),
-            method: "GET",
+    $.ajax({
+        dataType: 'json',
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50&category=22&type=multiple"),
+        method: "GET",
 
-            success: function(results) {
-                console.log('AJAX Success function called, with the following result:', results);
-                trivia_obj = results;
-            },
-            error: function(results){
-                console.log('error', results);
-            }
-        });
+        success: function(results) {
+            console.log('AJAX Success function called, with the following result:', results);
+            trivia_obj = results;
+        },
+        error: function(results){
+            console.log('error', results);
+        }
+    });
 }
 
 function generate_questions(obj){
@@ -80,12 +80,13 @@ function generate_questions(obj){
     var answer_correct = null;
     for(var i = 0; i < 1; i++){
         var index = Math.floor((Math.random() * 50) +1);
-     question = obj.results[index].question;
-     answer_one = obj.results[index].incorrect_answers[2];
-     answer_two = obj.results[index].incorrect_answers[0];
-     answer_three = obj.results[index].incorrect_answers[1];
-     answer_correct = obj.results[index].correct_answer;
+        question = obj.results[index].question;
+        answer_one = obj.results[index].incorrect_answers[2];
+        answer_two = obj.results[index].incorrect_answers[0];
+        answer_three = obj.results[index].incorrect_answers[1];
+        answer_correct = obj.results[index].correct_answer;
      }
+
     var question_display = question;
     var first_choice = answer_two;
     var second_choice = answer_correct;
@@ -132,7 +133,7 @@ function submit_trivia_hit(){
         //hide modal
         //lose turn/game
         trivia_question_counter = 0;
-
+        $('#lose_div').modal('toggle');
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
@@ -299,8 +300,10 @@ function didWeFindHer(e){
     console.log('this is the distance to carmen sandiego! ', distance);
     if (distance < 500000){
         console.log('you got her!');
+        $('#win_div').modal('show');
     }
     else{
         console.log('keep trying! she always goes to a capital!');
+        $('#lose_div').modal('show');
     }
 }
