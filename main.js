@@ -1,6 +1,5 @@
 var itinerary = [];
 var itineraryIndex = 0;
-var countriesArray = [];
 var map;
 var startMarker;
 var nextMarker;
@@ -11,6 +10,9 @@ var initialLocation = {
 
 callRESTCountries();
 
+/**
+ * createMap -- callback function that activates as soon as the GoogleMaps is loaded. Includes object that determines initial map properties, and also places a marker on the initial starting position
+ */
 function createMap() {
     console.log('createMap was called');
 
@@ -27,6 +29,9 @@ function createMap() {
     startMarker.setMap(map);
 }
 
+/**
+ * markNextLocation -- looks at the next object in our itinerary array and creates a marker there. also creates a click handler on the first/current marker that will pan you to the new marker
+ */
 function markNextLocation(){
     // if (itineraryIndex = 4){
     //     acceptFinalGuesses();
@@ -49,6 +54,12 @@ function markNextLocation(){
     itineraryIndex++;
 }
 
+/**
+ * callGeocoder -- makes an ajax call to Google Maps Geocoding API to determine lat/lng for the capital cities of the countries in the itinerary and adds that info to the respective objects in the itinerary
+ * @param urlString
+ * @param j
+ */
+
 function callGeocoder(urlString, j){
     $.ajax({
         dataType: 'json',
@@ -64,14 +75,16 @@ function callGeocoder(urlString, j){
     });
 }
 
+/**
+ * callRESTCountries -- calls the REST Countries API to get a list of the countries that we can pull information on-- calls createItinerary in the callback to make sure it runs only after we have information to work with
+ */
 function callRESTCountries(){
     $.ajax({
         dataType:'json',
         url: 'https://restcountries.eu/rest/v1/all',
         method: 'GET',
         success: function(response){
-            countriesArray = response;
-            createItinerary();
+            createItinerary(response);
         },
         error: function(){
             console.log('the call did not work...');
@@ -79,11 +92,15 @@ function callRESTCountries(){
     })
 }
 
-function createItinerary(){
+/**
+ * createItinerary -- randomly picks four countries from the countriesArray  pulles from RESTCountries
+ */
+
+function createItinerary(response){
     console.log('createItinerary called');
     for (var i = 0; i < 4; i++){
         var randomNumber = Math.floor(Math.random()*251);
-        var randomCountry = countriesArray[randomNumber];
+        var randomCountry = response[randomNumber];
         itinerary[i] = randomCountry;
     }
     for (var j = 0; j < 4; j++){
@@ -93,12 +110,20 @@ function createItinerary(){
     console.log(itinerary);
 }
 
+/**
+ * acceptFinalGuesses -- initiates the final mode of the game where the user can input clicks onto the map to guess where carmen sandiego is by creating a listener on the whole map for a click
+ */
 function acceptFinalGuesses(){
     map.addListener('click', function(e){
         console.log('a guess was made!');
         didWeFindHer(e);
     })
 }
+
+/**
+ * didWeFindHer -- checks if the user's guess is within a certain distance of carmen sandiego's actual location
+ * @param e
+ */
 
 function didWeFindHer(e){
     console.log('this is e', e);
@@ -108,7 +133,7 @@ function didWeFindHer(e){
     console.log('this is the userGuess obj: ', userGuess);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(userGuess, herLocation);
     console.log('this is the distance to carmen sandiego! ', distance);
-    if (distance < 10000){
+    if (distance < 500000){
         console.log('you got her!');
     }
     else{
