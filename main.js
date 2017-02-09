@@ -4,7 +4,7 @@
 // Weglot.setup({
 //     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
 //     originalLanguage: 'en',
-//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
+//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
 // });
 
 $(document).ready(function(){
@@ -12,7 +12,7 @@ $(document).ready(function(){
     trivia_ajax_call();
     $('#trivia_btn').click(function(){
         generate_questions(trivia_obj);
-        $('.modal-dialog').css('visibility', 'visible');
+        $('#trivia').css('visibility', 'visible');
         $('#answer').text('');
     });
     $('#submit_trivia').click(function(){
@@ -195,6 +195,11 @@ function markNextLocation(){
     startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
         startMarker = nextMarker;
+    });
+
+    nextMarker.addListener('click', function(){
+        console.log('we should be able to a dang modal');
+        $('#trivia').modal();
     });
 
     itineraryIndex++;
