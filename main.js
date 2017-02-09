@@ -1,7 +1,11 @@
 // Weglot.setup({
 //     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
 //     originalLanguage: 'en',
+<<<<<<< HEAD
 //     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
+=======
+//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
+>>>>>>> e3018c486add1ece129dccb14a6084f39662df63
 // });
 
 $(document).ready(function(){
@@ -9,14 +13,18 @@ $(document).ready(function(){
     trivia_ajax_call();
     $('#trivia_btn').click(function(){
         generate_questions(trivia_obj);
-        $('.modal-dialog').css('visibility', 'visible');
+        $('#trivia').css('visibility', 'visible');
         $('#answer').text('');
     });
     $('#submit_trivia').click(function(){
       submit_trivia_hit();
     });
     input_click_handlers();
+<<<<<<< HEAD
     $('#instructions_div').modal('show');
+=======
+    $('#instructions').modal();
+>>>>>>> e3018c486add1ece129dccb14a6084f39662df63
 });
 
 var trivia_question_counter = 0;
@@ -192,6 +200,11 @@ function markNextLocation(){
     startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
         startMarker = nextMarker;
+    });
+
+    nextMarker.addListener('click', function(){
+        console.log('we should be able to a dang modal');
+        $('#trivia').modal();
     });
 
     itineraryIndex++;
