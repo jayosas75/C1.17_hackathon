@@ -7,21 +7,22 @@
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
-    $('#trivia_btn').click(function(){
-        generate_questions(trivia_obj);
-        $('#trivia').css('visibility', 'visible');
-        $('#answer').text('');
-    });
+    // $('#trivia_btn').click(function(){
+    //     generate_questions(trivia_obj);
+    //     $('#trivia').css('visibility', 'visible');
+    //     $('#answer').text('');
+    // });
     $('#submit_trivia').click(function(){
       submit_trivia_hit();
     });
     input_click_handlers();
-    $('#instructions_div').modal('show');
+    // $('#instructions_div').modal('show');
 });
 
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
+var trivia_obj;
 
 //function/method to initiate game
 
@@ -170,6 +171,10 @@ function createMap() {
         icon: 'graphics/flight.png'
     });
     startMarker.setMap(map);
+
+    startMarker.addListener('click', function(){
+        markNextLocation();
+    })
 }
 
 /**
@@ -196,7 +201,8 @@ function markNextLocation(){
 
     nextMarker.addListener('click', function(){
         console.log('we should be able to a dang modal');
-        $('#trivia').modal();
+        generate_questions(trivia_obj);
+        $('#trivia_div').modal();
     });
 
     itineraryIndex++;
