@@ -12,7 +12,33 @@ $(document).ready(function(){
     });
     input_click_handlers();
     $('#instructions_div').modal('show');
+
+    $( '.modal-body label' ).shuffle();
 });
+
+(function($){
+
+    $.fn.shuffle = function() {
+
+        var allElems = this.get(),
+            getRandom = function(max) {
+                return Math.floor(Math.random() * max);
+            },
+            shuffled = $.map(allElems, function(){
+                var random = getRandom(allElems.length),
+                    randEl = $(allElems[random]).clone(true)[0];
+                allElems.splice(random, 1);
+                return randEl;
+            });
+
+        this.each(function(i){
+            $(this).replaceWith($(shuffled[i]));
+        });
+
+        return $(shuffled);
+
+    };
+})(jQuery);
 
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
@@ -38,7 +64,7 @@ function input_click_handlers(){
     });
     $('#second_choice').click(function(){
         console.log('correct answer hit');
-        last_answer = true;
+        last_answer = true
         trivia_question_counter_correct++;
     });
     $('#third_choice').click(function(){
@@ -75,25 +101,57 @@ function generate_questions(obj){
     var answer_two = null;
     var answer_three = null;
     var answer_correct = null;
+    for(var i = 0; i < 3; i++){
+        var random_number1 = Math.floor((Math.random()* 3));
+        var random_number2 = Math.floor((Math.random()* 3));
+        var random_number3 = Math.floor((Math.random()* 3));
+        if (random_number2 === random_number1){
+            i = 1;
+        }
+        if(random_number2 === random_number3){
+            i = 1;
+        }
+        if (random_number3 === random_number1){
+            i = 1;
+        }
+
+    }
     for(var i = 0; i < 1; i++){
         var index = Math.floor((Math.random() * 50) +1);
         question = obj.results[index].question;
-        answer_one = obj.results[index].incorrect_answers[2];
-        answer_two = obj.results[index].incorrect_answers[0];
-        answer_three = obj.results[index].incorrect_answers[1];
+        answer_one = obj.results[index].incorrect_answers[random_number1];
+        answer_two = obj.results[index].incorrect_answers[random_number2];
+        answer_three = obj.results[index].incorrect_answers[random_number3];
         answer_correct = obj.results[index].correct_answer;
      }
+/*
+     for(var i = 0; i < 4; i++){
+        var random_number4 = Math.floor((Math.random()* 4) + 1);
+        var random_number5 = Math.floor((Math.random()* 4) + 1);
+        var random_number6 = Math.floor((Math.random()* 4) + 1);
+        var random_number7 = Math.floor((Math.random()* 4) + 1);
+        if (random_number4 === random_number5 || random_number4 === random_number6 || random_number4 === random_number7){
+            i = 2;
+        }
+        if(random_number5 === random_number6 || random_number5 === random_number6 || random_number5 || random_number7){
+            i = 2;
+        }
+        if (random_number6 === random_number7){
+            i = 2;
+        }
 
-    var question_display = question;
-    var first_choice = answer_two;
-    var second_choice = answer_correct;
-    var third_choice = answer_one;
-    var fourth_choice = answer_three;
-    $('#question').text(question_display);
-    $('#first').text(first_choice);
-    $('#second').text(second_choice);
-    $('#third').text(third_choice);
-    $('#fourth').text(fourth_choice);
+    }*/
+
+        var question_display = question;
+        var first_choice = answer_two;
+        var second_choice = answer_correct;
+        var third_choice = answer_one;
+        var fourth_choice = answer_three;
+        $('#question').text(question_display);
+        $('#first').text(first_choice);
+        $('#second').text(second_choice);
+        $('#third').text(third_choice);
+        $('#fourth').text(fourth_choice);
 }
 
 
@@ -143,8 +201,6 @@ function submit_trivia_hit(){
 //if 3 correct questions close modal and update player status and enable click on new country
 
 //variable to track incorrect answers on trivia modal
-
-//add click handler for
 
 //update player status/status indicator on correct/incorrect answer
 
@@ -301,3 +357,5 @@ function didWeFindHer(e){
         $('#lose_div').modal('show');
     }
 }
+
+// store answers in array and compare correct answer to array
