@@ -1,8 +1,11 @@
-Weglot.setup({
-    api_key: 'wg_2fce281d81d90095a77029ebf6244897',
-    originalLanguage: 'en',
-    destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
-});
+/**
+ * translation API. Can translate from english to ten other languages
+ */
+// Weglot.setup({
+//     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
+//     originalLanguage: 'en',
+//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
+// });
 
 $(document).ready(function(){
     console.log('document ready');
@@ -16,6 +19,7 @@ $(document).ready(function(){
       submit_trivia_hit();
     });
     input_click_handlers();
+    $('#instructions_div').modal('show');
 });
 
 var trivia_question_counter = 0;
@@ -104,7 +108,7 @@ function submit_trivia_hit(){
         setTimeout(function(){
             console.log('waiting to close modal');
         }, 4000);
-        $('.modal-dialog').css('visibility', 'hidden');
+        $('#country_win').css('visibility', 'hidden');
         $('#trivia').css('visibility', 'hidden');
         //advance on map
         trivia_question_counter = 0;
@@ -121,7 +125,7 @@ function submit_trivia_hit(){
         //hide modal
         //lose turn/game
         trivia_question_counter = 0;
-        $('#modal').modal('toggle');
+        $('#lose_div').modal('toggle');
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
