@@ -1,7 +1,7 @@
 // Weglot.setup({
 //     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
 //     originalLanguage: 'en',
-//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
+//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
 // });
 
 $(document).ready(function(){
@@ -11,13 +11,15 @@ $(document).ready(function(){
       submit_trivia_hit();
     });
     input_click_handlers();
-    $('#instructions').modal();
+    // $('#instructions_div').modal('show');
 });
 
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
 var last_answer = null;
+var trivia_obj;
+
 
 //function/method to initiate game
 
@@ -178,6 +180,10 @@ function createMap() {
         icon: 'graphics/flight.png'
     });
     startMarker.setMap(map);
+
+    startMarker.addListener('click', function(){
+        markNextLocation();
+    })
 }
 
 /**
@@ -206,6 +212,7 @@ function markNextLocation(){
         console.log('we should be able to a dang modal');
         $('#trivia').modal();
         generate_questions(trivia_obj);
+
     });
 
     itineraryIndex++;
