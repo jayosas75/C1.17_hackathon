@@ -16,7 +16,7 @@ $(document).ready(function(){
         submit_trivia_hit();
     });
     input_click_handlers();
-    // $('#instructions_div').modal('show');
+    $('#instructions_div').modal('show');
 });
 
 var trivia_question_counter = 0;
@@ -171,10 +171,6 @@ function createMap() {
         icon: 'graphics/flight.png'
     });
     startMarker.setMap(map);
-
-    startMarker.addListener('click', function(){
-        markNextLocation();
-    })
 }
 
 /**
@@ -192,8 +188,10 @@ function markNextLocation(){
     });
 
     nextMarker.setMap(map);
+
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
+
     startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
         startMarker = nextMarker;
@@ -203,8 +201,7 @@ function markNextLocation(){
         console.log('we should be able to a dang modal');
         generate_questions(trivia_obj);
         $('#trivia_div').modal();
-    });
-
+        });
     itineraryIndex++;
 }
 
