@@ -55,8 +55,9 @@ function input_click_handlers(){
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
-        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50&category=22&type=multiple"),
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple"),
         method: "GET",
+
 
         success: function(results) {
             console.log('AJAX Success function called, with the following result:', results);
