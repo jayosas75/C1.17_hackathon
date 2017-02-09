@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     background-image: url("img/background.jpg");
     background-repeat: no-repeat;
@@ -91,4 +92,18 @@ body {
     width: 20%;
     margin-left: 40%;
     margin-top: 58%;
+=======
+
+span {
+    margin-right: 100vh;
+}
+
+#answer {
+    text-align: center;
+    font-size: 8vh;
+}
+
+#submit_trivia {
+    margin-left: 2vw;
+>>>>>>> 96c4f42c417b813a7bed097f38b7b454cc1d762f
 }
