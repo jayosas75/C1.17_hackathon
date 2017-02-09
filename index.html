@@ -18,6 +18,7 @@
     </head>
 
     <body>
+    <div class ='fix_body'>
         <div class="total_score">
             Total Score
         </div>
@@ -38,70 +39,106 @@
             </div>
         </div>
 
-        <!-- Modal for Trivia-->
-        <div id='trivia_div' class="modal" role="dialog">
-            <div class="trivia">
-                <div class="trivia_questions">TRIVIA QUESTIONS</div>
-                <div>
-                    <h2 id="question"></h2>
-                    <input type="radio" name="answers" id="first_choice"> <span id="first"></span>
-                    <input type="radio" name="answers" id="second_choice"> <span id="second"></span>
-                    <input type="radio" name="answers" id="third_choice"> <span id="third"></span>
-                    <input type="radio" name="answers" id="fourth_choice"> <span id="fourth"></span>
+                    <!-- Modal for Trivia Questions -->
+            <div id="trivia" class="modal" role="dialog">
+                        <div class=" trivia modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Answer these questions correctly to capture Carmen!</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h2 id="question"></h2>
+                                    <input type="radio" name="answers" id="first_choice"> <span id="first"></span>
+                                    <input type="radio" name="answers" id="second_choice"> <span id="second"></span>
+                                    <input type="radio" name="answers" id="third_choice"> <span id="third"></span>
+                                    <input type="radio" name="answers" id="fourth_choice"> <span id="fourth"></span>
+                                </div>
+                                <br>
+                                <div>
+                                    <button type="button" class="submit_btn btn btn-primary" id="submit_trivia">Submit</button>
+                                    <div class="wrong">
+                                        <img class='black_x' src = "img/cross-bk.png">
+                                        <img class='black_check' src="img/check_bk.png"/>
+                                        <img class='red_x' src = "img/cross_rd.png">
+                                        <img class="red_check" src="img/check_gr.png"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Modal for Country Win-->
+        <div id="country_win" class="modal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">You followed her to this country!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Answer the next set of trivia questions to follow her to the next country!</p>
+                            </div>
+                            <div class="modal-start">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Move on!</button>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            <img class= 'submit_btn' src="img/SUBMIT.png">
-            <div class="right">
-                <img src = "img/check_gr.png">
-                <img src = "img/check_bk.png">
-            </div>
-            <div class="wrong">
-                <img src = "img/cross_rd.png">
-            <img src = "img/cross-bk.png">
-            </div>
-            </div>
-        </div>
 
+                <!-- Modal for Real Win-->
+        <div id="real_win" class="modal" role="dialog" data-toggle="modal">
+                    <div class="modal-dialog">
 
-        <!--<div id='trivia_div' class="modal">-->
-            <!--<div class="trivia">-->
-                <!--<div class="trivia_questions">TRIVIA QUESTIONS</div>-->
-                <!--<img class= 'submit_btn' src="img/SUBMIT.png">-->
-                <!--<div class="right">-->
-                    <!--<img src = "img/check_gr.png">-->
-                    <!--<img src = "img/check_bk.png">-->
-                <!--</div>-->
-            <!--</div>-->
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">You caught Carmen Sandiego! The police now have her in custody thanks to you!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Thanks for playing the game and catching this international criminal.</p>
+                            </div>
+                            <div class="modal-start">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Play again!</button>
 
-                <!-- Modal for Landing Instructions -->
-            <!--<button type="button" id="instruction btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#instructions">instructions</button>-->
+                            </div>
+                        </div>
 
-            <!--<div id="instructions" class="modal" role="dialog">-->
-                    <!--<div class="modal-dialog modal-lg">-->
+                    </div>
+                </div>
 
-                        <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-                        <!--<div class="modal-content">-->
-                            <!--<div class="modal-header">-->
-                                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                <!--<h4 class="modal-title">Instructions for Play</h4>-->
-                            <!--</div>-->
-                            <!--<div class="modal-body">-->
-                                <!--<p>Look at the map</p>-->
-                                <!--<p>Answer the trivia questions correctly.</p>-->
-                                <!--<p>If you answer three correctly, you can follow Carmen to the new country!</p>-->
-                                <!--<p>If not, try again later. No judgement.</p>-->
-                            <!--</div>-->
-                            <!--<div class="modal-start">-->
-                                <!--<button type="button" class="btn btn-warning" data-dismiss="modal">Start</button>-->
+                <!-- Modal for Losers-->
+        <div id="country_lose" class="modal" role="dialog">
+                    <div class="modal-dialog">
 
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<div class="modal-footer">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--</div>-->
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">You can't follow her to this country!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>You were not able to answer enough trivia correctly. Don't worry, try again.</p>
+                            </div>
+                            <div class="modal-start">
+                                <button type="button" class="btn btn-info" data-dismiss="modal">Try again.</button>
 
-                    <!--</div>-->
-                <!--</div>-->
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
         <!-- Modal for Win Condition-->
         <div id='win_div' class="modal">
             <div class="win">
@@ -115,5 +152,6 @@
                 <img class= 'playagain_btn' src="img/play_again.jpg">
             </div>
         </div>
+    </div>
     </body>
 </html>

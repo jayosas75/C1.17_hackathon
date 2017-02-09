@@ -7,12 +7,7 @@
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
-    // $('#trivia_btn').click(function(){
-    //     generate_questions(trivia_obj);
-    //     $('#trivia').css('visibility', 'visible');
-    //     $('#answer').text('');
-    // });
-    $('#submit_trivia').click(function(){
+    $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
     input_click_handlers();
@@ -22,7 +17,9 @@ $(document).ready(function(){
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
+var last_answer = null;
 var trivia_obj;
+
 
 //function/method to initiate game
 
@@ -37,15 +34,19 @@ var trivia_obj;
 function input_click_handlers(){
     $('#first_choice').click(function(){
         trivia_question_counter_incorrect++;
+        last_answer = false;
     });
     $('#second_choice').click(function(){
         console.log('correct answer hit');
+        last_answer = true;
         trivia_question_counter_correct++;
     });
     $('#third_choice').click(function(){
+        last_answer = false;
         trivia_question_counter_incorrect++;
     });
     $('#fourth_choice').click(function(){
+        last_answer = false;
         trivia_question_counter_incorrect++;
     });
 }
@@ -54,8 +55,9 @@ function input_click_handlers(){
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
-        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50&category=22&type=multiple"),
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple"),
         method: "GET",
+
 
         success: function(results) {
             console.log('AJAX Success function called, with the following result:', results);
@@ -80,7 +82,8 @@ function generate_questions(obj){
         answer_two = obj.results[index].incorrect_answers[0];
         answer_three = obj.results[index].incorrect_answers[1];
         answer_correct = obj.results[index].correct_answer;
-    }
+     }
+
     var question_display = question;
     var first_choice = answer_two;
     var second_choice = answer_correct;
@@ -101,22 +104,26 @@ function submit_trivia_hit(){
 
     if(trivia_question_counter_correct === 3){
         console.log('3 correct answers');
-        //hide modal
-        $('#answer').text('Three Correct, Move on!');
         setTimeout(function(){
             console.log('waiting to close modal');
         }, 4000);
-        $('.modal-dialog').css('visibility', 'hidden');
-        $('#trivia').css('visibility', 'hidden');
+        //hide modal
+        $('#trivia').modal();
         //advance on map
         trivia_question_counter = 0;
         trivia_question_counter_incorrect = 0;
         trivia_question_counter_correct = 0;
     }
-    if(trivia_question_counter_correct > 0){
-        $('#answer').text('Correct');
+    if(last_answer === true){
+        $('.black_check').hide();
+        $('.red_check').show();
+        $('.black_x').show();
+        $('.red_x').hide();
     } else {
-        $('#answer').text('Incorrect');
+        $('.black_check').show();
+        $('.red_check').hide();
+        $('.black_x').hide();
+        $('.red_x').show();
     }
 
     if(trivia_question_counter_incorrect === 3){
@@ -197,7 +204,6 @@ function markNextLocation(){
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
-        console.log('we should be able to a dang modal');
         generate_questions(trivia_obj);
         $('#trivia_div').modal();
         startMarker = nextMarker;
