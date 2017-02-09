@@ -10,7 +10,7 @@ $(document).ready(function(){
     trivia_ajax_call();
     $('#trivia_btn').click(function(){
         generate_questions(trivia_obj);
-        $('.modal-dialog').css('visibility', 'visible');
+        $('#trivia').css('visibility', 'visible');
         $('#answer').text('');
     });
     $('#submit_trivia').click(function(){
