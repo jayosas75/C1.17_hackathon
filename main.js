@@ -7,11 +7,6 @@
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
-    $('#trivia_btn').click(function(){
-        generate_questions(trivia_obj);
-        $('#trivia').css('visibility', 'visible');
-        $('#answer').text('');
-    });
     $('#submit_trivia').click(function(){
       submit_trivia_hit();
     });
@@ -22,6 +17,7 @@ $(document).ready(function(){
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
+var last_answer = null;
 
 //function/method to initiate game
 
@@ -36,15 +32,19 @@ var trivia_question_counter_incorrect = 0;
 function input_click_handlers(){
     $('#first_choice').click(function(){
         trivia_question_counter_incorrect++;
+        last_answer = false;
     });
     $('#second_choice').click(function(){
         console.log('correct answer hit');
+        last_answer = true;
         trivia_question_counter_correct++;
     });
     $('#third_choice').click(function(){
+        last_answer = false;
         trivia_question_counter_incorrect++;
     });
     $('#fourth_choice').click(function(){
+        last_answer = false;
         trivia_question_counter_incorrect++;
     });
 }
@@ -67,13 +67,17 @@ function trivia_ajax_call(){
 }
 
 function generate_questions(obj){
-     var question = null;
-     var answer_one = null;
-     var answer_two = null;
-     var answer_three = null;
-     var answer_correct = null;
-     for(var i = 0; i < 1; i++){
-     var index = Math.floor((Math.random() * 50) +1);
+    $('.black_check').hide();
+    $('.red_check').hide();
+    $('.black_x').hide();
+    $('.red_x').hide();
+    var question = null;
+    var answer_one = null;
+    var answer_two = null;
+    var answer_three = null;
+    var answer_correct = null;
+    for(var i = 0; i < 1; i++){
+        var index = Math.floor((Math.random() * 50) +1);
      question = obj.results[index].question;
      answer_one = obj.results[index].incorrect_answers[2];
      answer_two = obj.results[index].incorrect_answers[0];
@@ -100,29 +104,33 @@ function submit_trivia_hit(){
 
     if(trivia_question_counter_correct === 3){
         console.log('3 correct answers');
-        //hide modal
-        $('#answer').text('Three Correct, Move on!');
         setTimeout(function(){
             console.log('waiting to close modal');
         }, 4000);
-        $('.modal-dialog').css('visibility', 'hidden');
-        $('#trivia').css('visibility', 'hidden');
+        //hide modal
+        $('#trivia').modal();
         //advance on map
         trivia_question_counter = 0;
         trivia_question_counter_incorrect = 0;
         trivia_question_counter_correct = 0;
     }
-    if(trivia_question_counter_correct > 0){
-        $('#answer').text('Correct');
+    if(last_answer === true){
+        $('.black_check').hide();
+        $('.red_check').show();
+        $('.black_x').show();
+        $('.red_x').hide();
     } else {
-        $('#answer').text('Incorrect');
+        $('.black_check').show();
+        $('.red_check').hide();
+        $('.black_x').hide();
+        $('.red_x').show();
     }
 
     if(trivia_question_counter_incorrect === 3){
         //hide modal
         //lose turn/game
         trivia_question_counter = 0;
-        $('#modal').modal('toggle');
+
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
@@ -197,6 +205,7 @@ function markNextLocation(){
     nextMarker.addListener('click', function(){
         console.log('we should be able to a dang modal');
         $('#trivia').modal();
+        generate_questions(trivia_obj);
     });
 
     itineraryIndex++;

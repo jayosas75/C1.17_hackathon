@@ -96,13 +96,15 @@
                                 <br>
                                 <div>
                                     <button type="button" class="btn btn-primary" id="submit_trivia">Submit</button>
-                                    <p id="answer">Right</p>
+                                    <div class="wrong">
+                                        <img class='black_x' src = "img/cross-bk.png">
+                                        <img class='black_check' src="img/check_bk.png"/>
+                                        <img class='red_x' src = "img/cross_rd.png">
+                                        <img class="red_check" src="img/check_gr.png"/>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <div class="wrong">
-                                        <img src = "img/cross_rd.png">
-                                        <img src = "img/cross-bk.png">
-                                    </div>
+
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
@@ -133,8 +135,6 @@
                 </div>
 
                 <!-- Modal for Real Win-->
-        <button type="button" id="win2 btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#real_win">Real_win</button>
-
         <div id="real_win" class="modal" role="dialog" data-toggle="modal">
                     <div class="modal-dialog">
 
@@ -157,8 +157,6 @@
                 </div>
 
                 <!-- Modal for Losers-->
-        <button type="button" id="losers btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#country_lose">country_lose</button>
-
         <div id="country_lose" class="modal" role="dialog">
                     <div class="modal-dialog">
 
