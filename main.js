@@ -28,10 +28,16 @@ function createMap() {
 }
 
 function markNextLocation(){
+    // if (itineraryIndex = 4){
+    //     acceptFinalGuesses();
+    //     return;
+    // }
+
     nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
     });
+
     nextMarker.setMap(map);
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
@@ -39,8 +45,8 @@ function markNextLocation(){
         map.panTo(nextMarker.getPosition());
         startMarker = nextMarker;
     });
-    itineraryIndex++;
 
+    itineraryIndex++;
 }
 
 function callGeocoder(urlString, j){
@@ -85,4 +91,27 @@ function createItinerary(){
         callGeocoder(urlString, j)
     }
     console.log(itinerary);
+}
+
+function acceptFinalGuesses(){
+    map.addListener('click', function(e){
+        console.log('a guess was made!');
+        didWeFindHer(e);
+    })
+}
+
+function didWeFindHer(e){
+    console.log('this is e', e);
+    var userGuess = e.latLng;
+    var herLocation = new google.maps.LatLng(itinerary[3].location.lat, itinerary[3].location.lng);
+    console.log('this is herLocation', herLocation);
+    console.log('this is the userGuess obj: ', userGuess);
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(userGuess, herLocation);
+    console.log('this is the distance to carmen sandiego! ', distance);
+    if (distance < 10000){
+        console.log('you got her!');
+    }
+    else{
+        console.log('keep trying! she always goes to a capital!');
+    }
 }
