@@ -2,13 +2,17 @@
 <html>
     <head>
         <title>Carmen Sandiego</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="style.css">
+
+        <script src="main.js"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18&callback=createMap"></script>
+
     </head>
 
     <body>
@@ -17,9 +21,7 @@
             <h1>Where in the World is Carmen Sandiego?</h1>
         </header>
 
-        <div id="map">
-            this is for map
-        </div>
+        <div style="width:100%;height:500px" id="googleMap"></div>
 
         <div id="modals">
 
