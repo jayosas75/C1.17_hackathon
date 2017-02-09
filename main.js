@@ -99,6 +99,7 @@ function submit_trivia_hit(){
             console.log('waiting to close modal');
         }, 4000);
         $('.modal-dialog').css('visibility', 'hidden');
+        $('#trivia').css('visibility', 'hidden');
         //advance on map
         trivia_question_counter = 0;
         trivia_question_counter_incorrect = 0;
@@ -114,6 +115,7 @@ function submit_trivia_hit(){
         //hide modal
         //lose turn/game
         trivia_question_counter = 0;
+        $('#modal').modal('toggle');
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
