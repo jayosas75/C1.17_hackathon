@@ -16,7 +16,7 @@ $(document).ready(function(){
         submit_trivia_hit();
     });
     input_click_handlers();
-    // $('#instructions_div').modal('show');
+    $('#instructions_div').modal('show');
 });
 
 var trivia_question_counter = 0;
