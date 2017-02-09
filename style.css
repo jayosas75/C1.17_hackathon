@@ -13,9 +13,8 @@ body {
     width: 54%;
     height: 86%;
     margin-left: 34%;
-    margin-top: 4%;
+    margin-top: 8%;
     border: 5px black solid;
-    border-radius: 15px;
 }
 #googleMap{
     width:100%;
@@ -109,5 +108,16 @@ span {
 
 #submit_trivia {
     margin-left: 2vw;
->>>>>>> 96c4f42c417b813a7bed097f38b7b454cc1d762f
+}
+.total_score {
+    position: absolute;
+    font-size: 20px;
+    margin-top: 16%;
+    margin-left: 14%;
+}
+.countries {
+    position: absolute;
+    font-size: 20px;
+    margin-top: 22%;
+    margin-left: 14%;
 }
