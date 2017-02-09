@@ -122,7 +122,7 @@ function submit_trivia_hit(){
         //hide modal
         //lose turn/game
         trivia_question_counter = 0;
-        $('#modal').modal('toggle');
+        $('#lose_div').modal('toggle');
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
@@ -196,7 +196,7 @@ function markNextLocation(){
 
     nextMarker.addListener('click', function(){
         console.log('we should be able to a dang modal');
-        $('#trivia').modal();
+        $('#trivia_div').modal();
     });
 
     itineraryIndex++;
@@ -283,8 +283,10 @@ function didWeFindHer(e){
     console.log('this is the distance to carmen sandiego! ', distance);
     if (distance < 500000){
         console.log('you got her!');
+        $('#win_div').modal('show');
     }
     else{
         console.log('keep trying! she always goes to a capital!');
+        $('#lose_div').modal('show');
     }
 }
