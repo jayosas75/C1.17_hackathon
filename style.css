@@ -1,0 +1,13 @@
+
+span {
+    margin-right: 100vh;
+}
+
+#answer {
+    text-align: center;
+    font-size: 8vh;
+}
+
+#submit_trivia {
+    margin-left: 2vw;
+}

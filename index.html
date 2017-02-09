@@ -3,13 +3,14 @@
     <head>
         <title>Carmen Sandiego</title>
         <link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
     </head>
+
 
     <body>
 
@@ -56,7 +57,7 @@
 
 
                     <!-- Modal for Trivia Questions -->
-            <button type="button" id="trivia btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trivia">trivia</button>
+            <button type="button" id="trivia_btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trivia">trivia</button>
 
             <div id="trivia" class="modal" role="dialog">
                         <div class="modal-dialog">
@@ -68,12 +69,16 @@
                                     <h4 class="modal-title">Answer these questions correctly to capture Carmen!</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Questions</p>
-                                    <p>Answers</p>
+                                    <h2 id="question"></h2>
+                                    <input type="radio" name="answers" id="first_choice"> <span id="first"></span>
+                                    <input type="radio" name="answers" id="second_choice"> <span id="second"></span>
+                                    <input type="radio" name="answers" id="third_choice"> <span id="third"></span>
+                                    <input type="radio" name="answers" id="fourth_choice"> <span id="fourth"></span>
                                 </div>
+                                <br>
                                 <div>
-                                    <h1>Wrong</h1>
-                                    <h1>Right</h1>
+                                    <button type="button" class="btn btn-primary" id="submit_trivia">Submit</button>
+                                    <p id="answer">Right</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
