@@ -1,11 +1,7 @@
 // Weglot.setup({
 //     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
 //     originalLanguage: 'en',
-<<<<<<< HEAD
 //     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
-=======
-//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh',
->>>>>>> e3018c486add1ece129dccb14a6084f39662df63
 // });
 
 $(document).ready(function(){
@@ -20,11 +16,7 @@ $(document).ready(function(){
       submit_trivia_hit();
     });
     input_click_handlers();
-<<<<<<< HEAD
     $('#instructions_div').modal('show');
-=======
-    $('#instructions').modal();
->>>>>>> e3018c486add1ece129dccb14a6084f39662df63
 });
 
 var trivia_question_counter = 0;
