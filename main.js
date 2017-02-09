@@ -7,7 +7,7 @@
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
-    $('#submit_trivia').click(function(){
+    $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
     input_click_handlers();
@@ -69,10 +69,6 @@ function trivia_ajax_call(){
 }
 
 function generate_questions(obj){
-    $('.black_check').hide();
-    $('.red_check').hide();
-    $('.black_x').hide();
-    $('.red_x').hide();
     var question = null;
     var answer_one = null;
     var answer_two = null;
@@ -213,6 +209,7 @@ function markNextLocation(){
         console.log('we should be able to a dang modal');
         $('#trivia').modal();
         generate_questions(trivia_obj);
+        $('.modal-backdrop').css('display', 'none');
 
     });
 
