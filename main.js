@@ -194,6 +194,7 @@ function markNextLocation(){
     var nextMarkerListener = nextMarker.addListener('click', function(){
         $('#trivia').modal();
         generate_questions();
+        countriesTracker();
         startMarkerListener.remove(startMarkerListener);
         nextMarkerListener.remove(nextMarkerListener);
         startMarker = nextMarker;
@@ -383,4 +384,13 @@ function create_p_for_hints(){
     var new_p8 = $('<p>').addClass('hints8');
     var new_p9 = $('<p>').addClass('hints9');
     $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
+}
+
+/**
+ * countriesTracker -- add countries to the country tracker as they are visited
+ */
+
+function countriesTracker(){
+    var newCountry = $('<li>').text(itinerary[itineraryIndex].name);
+    $('.countries > ul').append(newCountry);
 }
