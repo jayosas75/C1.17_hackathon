@@ -319,6 +319,15 @@ p{
     font-size:initial;
 }
 
+
 ul{
     font-size: initial;
 }
+.choices{
+    font-size: 3vh;
+    color: darkred;
+}
+.status_container{
+    width: 30%;
+}
+

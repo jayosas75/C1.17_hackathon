@@ -1,7 +1,7 @@
 Weglot.setup({
     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
     originalLanguage: 'en',
-    destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
+    destinationLanguages : 'es,ar,it,ko,de,ru,pt,ja,zh'
 });
 
 callRESTCountries();
