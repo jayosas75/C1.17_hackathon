@@ -25,7 +25,10 @@ var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
 var last_answer = null;
-var trivia_obj;
+var trivia_obj = null;
+var hint_tracker = 0;
+var player_correct_answers = 0;
+
 //function/method to initiate game
 //function to disable/enable click on target country
 //function/method to place carmen on map somewhere
@@ -38,7 +41,7 @@ function input_click_handlers(){
     });
     $('#second_choice').click(function(){
         console.log('correct answer hit');
-        last_answer = true
+        last_answer = true;
         trivia_question_counter_correct++;
     });
     $('#third_choice').click(function(){
