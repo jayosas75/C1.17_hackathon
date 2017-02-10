@@ -1,5 +1,5 @@
 Weglot.setup({
-    api_key: 'wg_2fce281d81d90095a77029ebf6244897',
+    api_key: 'wg_fc50e15a4b5f9f3becc135b95cfcdabf',
     originalLanguage: 'en',
     destinationLanguages : 'es,ar,it,ko,de,ru,pt,ja,zh'
 });
@@ -46,8 +46,7 @@ var player_hint_counter = 0;
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
-
-        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50")+ encodeURIComponent("&category=9") + encodeURIComponent("&type=multiple"),
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple") +encodeURIComponent("&encode=url3986") +encodeURIComponent("&category=9") ,
         method: "GET",
         success: function(results) {
             console.log('AJAX Success function called, with the following result:', results);

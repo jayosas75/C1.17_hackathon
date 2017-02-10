@@ -65,6 +65,8 @@ ul{
     list-style-type:none;
     text-align:center;
 }
+
+.ar, .it, .ko, .de,
 li {
     margin-top: 45%;
     margin-left: 10%;
