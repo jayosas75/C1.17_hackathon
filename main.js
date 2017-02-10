@@ -65,7 +65,7 @@ function generate_questions() {
     var answer = [];
     var index = Math.floor((Math.random() * 50) + 1);
 
-    var currentQuestion = trivia_obj.results[index];
+    var currentQuestion = trivia_obj['results'][index];
     var question = currentQuestion.question;
 
     for (var i = 0; i < 3; i++){
@@ -84,10 +84,25 @@ function generate_questions() {
     display_question(trivia_question);
 }
 
-function display_question(trivia_question){
-    console.log('display question called with this obj', trivia_question);
+function display_question(trivia_question) {
+    var labelArray = $('.labeldiv').contents();
+    var randomNumber = Math.floor(Math.random() * 4);
+    var randomTrack = [0,1,2,3];
     $('#question').text(trivia_question.question);
+
+    while(randomTrack.length > 0){
+
+    }
 }
+    console.log('this is labelArray ', labelArray);
+
+//     while (labelArray.length > 0){
+//         var currentAnswer = labelArray.splice(randomNumber, 1);
+//         if (currentAnswer !== undefined) {
+//             $('.answers').append(currentAnswer);
+//         }
+//     }
+// }
 
 
 
@@ -165,7 +180,7 @@ function submit_trivia_hit(){
     }
     trivia_question_counter++;
     $('input').prop('checked', false);
-    setTimeout(generate_questions(trivia_obj), 3000);
+    setTimeout(generate_questions(), 3000);
 }
 //determine if trivia question is correct
 //if 3 correct questions close modal and update player status and enable click on new country
@@ -220,8 +235,8 @@ function markNextLocation(){
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
-        generate_questions(trivia_obj);
         $('#trivia').modal();
+        generate_questions();
         startMarkerListener.remove(startMarkerListener);
         nextMarkerListener.remove(nextMarkerListener);
         startMarker = nextMarker;

@@ -167,8 +167,12 @@ label {
     width: 69%;
 }
 #question{
-    font-size: 10vh;
+    font-size: 3vh;
 }
-input{
-    font-size: 10vh;
+
+.answers{
+    width: 50%;
+}
+.choices{
+    font-size: 2vh;
 }
