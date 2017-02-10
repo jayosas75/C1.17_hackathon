@@ -3,17 +3,20 @@ Weglot.setup({
     originalLanguage: 'en',
     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
 });
+
+callRESTCountries();
+
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
     $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
-    $('#instructions_div').modal('show');
+    $('#instructions_div').modal("toggle");
     $('#play_btn').click(function(){
         $('.post_country_win').hide();
         console.log('markNextLocation');
-        $('#instructions_div').modal('hide');
+        $('#instructions_div').modal("toggle");
         markNextLocation();
     });
     generateCarmenClues();
@@ -36,7 +39,7 @@ var player_hint_counter = 0;
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
-        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple"),
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple") +encodeURIComponent("&encode=url3986"),
         method: "GET",
         success: function(results) {
             console.log('AJAX Success function called, with the following result:', results);
@@ -76,13 +79,13 @@ function generate_questions() {
 function move_onto_next_country(){
     if (itineraryIndex >= 3){
         acceptFinalGuesses();
-        $('#trivia').modal('toggle');
+        $('#trivia').modal("toggle");
         return;
     }
     $('.post_country_win').hide();
     $('p').hide();
     $('.submit_btn').show();
-    $('#trivia').modal('toggle');
+    $('#trivia').modal("toggle");
     reset_trivia_div_for_question();
     markNextLocation();
 }
@@ -92,11 +95,11 @@ function display_question(trivia_question) {
     var inputArray = $('input');
 
     console.log('this is labelArray ', inputArray);
-    $('#question').text(trivia_question.question);
-
+    $('#question').text(decodeURIComponent(trivia_question.question));
+    console.log('this should be a cleaned question string ', decodeURIComponent(trivia_question.question));
     for (var q = 4; q > 0; q--){
         var randomNumber = Math.floor(Math.random() * q);
-        $(inputArray[randomNumber]).next().text(trivia_question.answers[q-1]);
+        $(inputArray[randomNumber]).next().text(decodeURIComponent(trivia_question.answers[q-1]));
         inputArray.splice(randomNumber, 1);
         console.log('this is the random number ', randomNumber);
         console.log('this is the current answer I want to shove in', trivia_question.answers[q-1]);
@@ -124,7 +127,9 @@ function submit_trivia_hit(){
         return;
     }
 
-    if (userAnswer == trivia_question.answers[3]) {
+    var correctAnswer = decodeURIComponent(trivia_question.answers[3]);
+
+    if (userAnswer == correctAnswer) {
         console.log('you answered correctly!');
         player_hint_counter++;
         $('.black_check').hide();
@@ -156,7 +161,6 @@ var initialLocation = {
     longitude: -117.7394721
 }; //We start at LearningFuze!
 
-callRESTCountries();
 
 /**
  * createMap -- callback function that activates as soon as the GoogleMaps is loaded. Includes object that determines initial map properties, and also places a marker on the initial starting position
@@ -192,7 +196,7 @@ function markNextLocation(){
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
-        $('#trivia').modal();
+        $('#trivia').modal("toggle");
         generate_questions();
         countriesTracker();
         startMarkerListener.remove(startMarkerListener);
@@ -233,10 +237,10 @@ function callRESTCountries(){
         method: 'GET',
         success: function(response){
             createItinerary(response);
-            console.log('john: ', response)
+            console.log('successful query of REST Countries ', response);
         },
         error: function(){
-            console.log('the call did not work...');
+            console.log('could not reach REST Countries');
         }
     })
 }
@@ -279,12 +283,12 @@ function didWeFindHer(e){
     console.log('this is the distance to carmen sandiego! ', distance);
     if (distance < 500000){
         console.log('you got her!');
-        $('#win_div').modal();
+        $('#real_win').modal("toggle");
         return;
     }
     else{
         if(wrong_guesses > 4){
-            $('#lose_div').modal();
+            $('#country-lose').modal("toggle");
             return;
         }
         wrong_guesses++;
