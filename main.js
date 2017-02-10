@@ -69,32 +69,47 @@ function trivia_ajax_call(){
     });
 }
 
-function generate_questions(obj){
-    var question = null;
-    var answer_one = null;
-    var answer_two = null;
-    var answer_three = null;
-    var answer_correct = null;
-    for(var i = 0; i < 1; i++){
-        var index = Math.floor((Math.random() * 50) +1);
-        question = obj.results[index].question;
-        answer_one = obj.results[index].incorrect_answers[2];
-        answer_two = obj.results[index].incorrect_answers[0];
-        answer_three = obj.results[index].incorrect_answers[1];
-        answer_correct = obj.results[index].correct_answer;
-     }
+function generate_questions() {
+    var answer = [];
+    var index = Math.floor((Math.random() * 50) + 1);
 
-    var question_display = question;
-    var first_choice = answer_two;
-    var second_choice = answer_correct;
-    var third_choice = answer_one;
-    var fourth_choice = answer_three;
-    $('#question').text(question_display);
-    $('#first').text(first_choice);
-    $('#second').text(second_choice);
-    $('#third').text(third_choice);
-    $('#fourth').text(fourth_choice);
+    var currentQuestion = trivia_obj.results[index];
+    var question = currentQuestion.question;
+
+    for (var i = 0; i < 3; i++){
+        answer[i] = currentQuestion.incorrect_answers[i];
+    }
+    answer[3] = currentQuestion.correct_answer;
+
+    console.log('this is whatever is in answer ', answer);
+    console.log('this is the question', question);
+
+    var trivia_question = {
+        question: question,
+        answers: answer
+    }
+
+    display_question(trivia_question);
 }
+
+function display_question(trivia_question){
+
+}
+
+
+
+
+    // var question_display = question;
+    // var first_choice = answer_two;
+    // var second_choice = answer_correct;
+    // var third_choice = answer_one;
+    // var fourth_choice = answer_three;
+    // $('#question').text(question_display);
+    // $('#first').text(first_choice);
+    // $('#second').text(second_choice);
+    // $('#third').text(third_choice);
+    // $('#fourth').text(fourth_choice);
+// }
 
 
 //hit submit on trivia and go to next question
