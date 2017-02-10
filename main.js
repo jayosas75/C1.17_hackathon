@@ -20,15 +20,14 @@ $(document).ready(function(){
         console.log('reset');
 
     });
+    $('.post_country_win').click(function(){
+       move_onto_next_country();
+    });
 });
 
 var trivia_question_counter = 0;
-var trivia_question_counter_correct = 0;
-var trivia_question_counter_incorrect = 0;
-var last_answer = null;
 var trivia_obj;
 var trivia_question;
-var player_correct_counter = 0;
 var player_hint_counter = 0;
 
 function trivia_ajax_call(){
@@ -70,6 +69,12 @@ function generate_questions() {
     trivia_question_counter++;
 }
 
+function move_onto_next_country(){
+    $('#trivia').modal();
+    reset_trivia_div_for_question();
+    markNextLocation();
+}
+
 function display_question(trivia_question) {
     console.log('this is the trivia_question as passed in ', trivia_question);
     var inputArray = $('input');
@@ -88,16 +93,41 @@ function display_question(trivia_question) {
 }
 
 function submit_trivia_hit(){
-    $("input:radio:checked").removeAttr("checked");
+    $("input:radio").attr("checked", false);
     var userAnswer = $("input:radio:checked").next().text();
 
     console.log('submit trivia button hit');
     console.log('this is the userAnswer ', userAnswer);
 
+    if(trivia_question_counter === 3){
+        $('.black_check').hide();
+        $('.red_check').hide();
+        $('.black_x').hide();
+        $('.red_x').hide();
+        display_hints();
+        $('.submit_btn').addClass('post_country_win');
+        trivia_question_counter = 0;
+        return;
+    }
+
     if (userAnswer == trivia_question.answers[3]) {
         console.log('you answered correctly!');
+        player_hint_counter++;
+        $('.black_check').hide();
+        $('.red_check').show();
+        $('.black_x').show();
+        $('.red_x').hide();
+        generate_questions();
+
     }else {
         console.log('you answered incorrectly!');
+        $('.black_check').show();
+        $('.red_check').hide();
+        $('.black_x').hide();
+        $('.red_x').show();
+
+        generate_questions();
+
     }
 }
 
@@ -311,6 +341,10 @@ function generateCarmenClues(){
 
 function display_hints() {
     //display right after u beat country
+    $('.black_check').hide();
+    $('.red_check').hide();
+    $('.black_x').hide();
+    $('.red_x').hide();
     $('#question').hide();
     $('input').hide();
     $('label').hide();
@@ -383,4 +417,14 @@ function create_p_for_hints(){
     var new_p8 = $('<p>').addClass('hints8');
     var new_p9 = $('<p>').addClass('hints9');
     $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
+}
+
+function reset_trivia_div_for_question(){
+    $('#question').show();
+    $('input').show();
+    $('label').show();
+    $('.black_check').show();
+    $('.red_check').hide();
+    $('.black_x').show();
+    $('.red_x').hide();
 }
