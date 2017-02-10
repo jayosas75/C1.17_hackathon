@@ -107,6 +107,7 @@ function submit_trivia_hit(){
         display_hints();
         $('.submit_btn').addClass('post_country_win');
         trivia_question_counter = 0;
+        scoreTracker();
         return;
     }
 
@@ -224,6 +225,7 @@ function markNextLocation(){
     var nextMarkerListener = nextMarker.addListener('click', function(){
         $('#trivia').modal();
         generate_questions();
+        countriesTracker();
         startMarkerListener.remove(startMarkerListener);
         nextMarkerListener.remove(nextMarkerListener);
         startMarker = nextMarker;
@@ -406,7 +408,7 @@ function display_hints() {
     }
 }
 
-function create_p_for_hints(){
+function create_p_for_hints() {
     var new_p1 = $('<p>').addClass('hints1');
     var new_p2 = $('<p>').addClass('hints2');
     var new_p3 = $('<p>').addClass('hints3');
@@ -428,3 +430,21 @@ function reset_trivia_div_for_question(){
     $('.black_x').show();
     $('.red_x').hide();
 }
+
+/**
+ * countriesTracker -- add countries to the country tracker as they are visited
+ */
+
+function countriesTracker(){
+    var newCountry = $('<li>').text(itinerary[itineraryIndex].name);
+    $('.countries > ul').append(newCountry);
+}
+
+/**
+ * scoreTracker -- update the score as questions are answered.
+ */
+
+function scoreTracker(){
+    $('.total_score').text(player_hint_counter + 'clues gathered!');
+}
+
