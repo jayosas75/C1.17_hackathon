@@ -3,33 +3,105 @@ html, body {
     padding: 0;
 }
 body {
+    font-size: 0;
+    background-image: url("img/background.jpg");
+    background-repeat: no-repeat;
     background-size: 100%;
-    max-width:100%;
-    max-height:100%;
     height: 100vh;
     width: 100vw;
-    background: url("img/background.jpg") no-repeat center center;
-    background-size: cover;
+}
+.body_container {
+    margin-top: 5%;
+    margin-left: 5%;
+    float: left;
+    height: 89%;
+    width: 25%;
+}
+.logo{
+    width: 80%;
     margin: 0;
 }
-.fix_body {
-    height: 100%;
-    width: 100%;
+.status_container {
+    background-image: url(img/typewriter.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin-top: 10%;
+    margin-left: 0;
+    float: left;
+    height: 55%;
+    width: 77%;
     position: relative;
 }
-.map{
-    background-color: white;
-    font-size: 20vh;
-    width: 44%;
-    height: 82%;
-    left: 34%;
-    top: 8%;
-    border: 5px black solid;
+.total_score {
+    margin-top: 13%;
+    margin-left: 23%;
+    width: 73%;
+    font-size: 2.5vh;
     position: absolute;
+    font-family: "Arial Black";
+    color: black;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+.score_number{
+    margin-top: 18%;
+    margin-left: 43%;
+    width: 50%;
+    font-size: 1.5vw;
+    position: absolute;
+    font-family: "Arial Black";
+}
+.countries{
+    margin-top: 32%;
+    margin-left: 31%;
+    width: 50%;
+    font-size: 1.5vw;
+    position: absolute;
+    font-family: "Arial Black";
+    color: darkred;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+li:nth-child(1) {
+    margin-top: 45%;
+    margin-left: 10%;
+    width: 50%;
+    font-size: 1.2vw;
+    position: absolute;
+    font-family: arial;
+}
+li:nth-child(2) {
+    margin-top: 55%;
+    margin-left: 10%;
+    width: 50%;
+    font-size: 1.2vw;
+    position: absolute;
+    font-family: arial;
+}
+li:nth-child(3){
+    margin-top: 65%;
+    margin-left: 10%;
+    width: 50%;
+    font-size: 1.2vw;
+    position: absolute;
+    font-family: arial;
+}
+.map {
+    position: absolute;
+    margin-left: 32%;
+    margin-top: 7%;
+    width: 55%;
+    height: 76%;
+    border: 1vh black solid;
 }
 #googleMap{
     width:100%;
     height: 100%;
+}
+.carmen{
+    width: 20%;
+    margin-left: 46%;
+    margin-top: 31%;
+    z-index: 1;
+    position: fixed;
 }
 .modal {
     display: none; /* Hidden by default */
@@ -45,25 +117,146 @@ body {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .instructions {
-    font-size: 0;
     background-image: url("img/instructions.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
     width: 45%;
-    height: 70%;
+    height: 65%;
 }
-
+.instructions_header{
+    font-size: 6vh;
+    margin-top: 3%;
+    margin-left: 17%;
+    position: absolute;
+    font-family: "Arial Black";
+}
+.descriptions{
+    position: absolute;
+    width: 25%;
+    font-size: 2vh;
+    margin-top: 10%;
+    margin-left: 4%;
+    font-family: arial;
+}
+.running{
+    position: absolute;
+    width: 55%;
+    margin-top: -30%;
+    margin-left: 104%;
+}
+#play_btn {
+    margin-top: 3%;
+    margin-left: 58%;
+    position: absolute;
+    width: 41%;
+    padding: 5% 10%;
+    font-size: 3vh;
+    font-family: "Arial Black";
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    box-shadow: 0 9px #999;
+}
+#play_btn:hover {background-color: #3e8e41}
+#play_btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
 .trivia {
-    padding: 1%;
-    background-image: url("img/modal_background.jpg");
+    padding: 1% 3%;
+    background-image: url(img/modal_background.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    width: 45%;
-    height: 70%;
+    width: 35%;
+    height: 52%;
 }
-
+.modal-body{
+    width: 69%;
+}
+#question{
+    font-size: 3vh;
+    width:140%;
+}
+.answers{
+    width: 140%;
+    margin: 0;
+}
+.choices{
+    font-size: 3vh;
+    color: darkred;
+}
+.right{
+    margin-top: 20%;
+    margin-left: 0%;
+}
+.black_check{
+    position: absolute;
+}
+.red_check{
+    position: absolute;
+}
+.wrong{
+    margin-left: 33%;
+}
+.black_x{
+    position: absolute;
+}
+.red_x{
+    position: absolute;
+}
+.submit_btn {
+    margin-top: 1.5%;
+    margin-left: 4%;
+    position: absolute;
+    width: 9%;
+    padding: 1%;
+    font-size: 2vh;
+    font-family: "Arial Black";
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    box-shadow: 0 9px #999;
+}
+.submit_btn:hover {background-color: #3e8e41}
+.submit_btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.post_country_win {
+    margin-top: 3%;
+    margin-left: 4.5%;
+    position: absolute;
+    width: 26%;
+    padding: 1%;
+    font-size: 3vh;
+    font-family: "Arial Black";
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    box-shadow: 0 9px #999;
+}
+.post_country_win:hover {background-color: #3e8e41}
+.post_country_win:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
 .win {
     font-size: 0;
     background-image: url("img/win_condition.jpg");
@@ -99,80 +292,6 @@ body {
     margin-left: 2vw;
 }
 
-.total_score {
-    height:48%;
-    width:98%;
-}
-.countries {
-    height:48%;
-    width:98%;
-}
-.new_instructions{
-    font-size: 20px;
-    margin-top: 14%;
-    margin-left: 10%;
-    width: 50%;
-}
-.instructions_header{
-    font-size: 8vh;
-    padding: 0;
-    margin: 0;
-    margin-left: 37%;
-}
-#play_btn{
-    width: 18%;
-    padding: 1.5%;
-    margin-left: 40%;
-    font-size: 3vh;
-}
-.submit_btn{
-    width: 25%;
-    padding: 1.5%;
-    margin-left: 40%;
-    font-size: 3vh;
-}
-.right{
-    position: relative;
-}
-.black_check{
-    position: absolute;
-}
-.red_check{
-    position: absolute;
-}
-.wrong{
-    position: relative;
-    margin-left: 20%;
-}
-.black_x{
-    position: absolute;
-}
-.red_x{
-    position: absolute;
-}
-.modal-body{
-    width: 69%;
-}
-#question{
-    font-size: 3vh;
-}
-.answers{
-    width: 140%;
-    margin: 0;
-}
-.choices{
-    font-size: 3vh;
-    color: darkred;
-}
-.status_container{
-    width: 15%;
-    height:25%;
-    position:absolute;
-    left:10%;
-    bottom: 30%;
-    text-align:center;
-}
-
 .countries ul{
     list-style-type:none;
     margin: 0;
@@ -182,3 +301,4 @@ body {
 #real_win{
     background-color: white;
 }
+

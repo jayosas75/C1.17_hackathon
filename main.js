@@ -331,9 +331,9 @@ function generateCarmenClues(){
         "Carmen dropped yet another scrap of paper with a URL on it. I can't quite make out the URL, but the top-level domain is " + itinerary[3]['topLevelDomain'] + "!",
         "She dropped a tourism brochure. She's headed to " + itinerary[3]['capital'] + "!"];
 
-     for (var q = 0; q < 9 ; q++) {
-         carmenCluesArray[q] = clueTemplateArray[q];
-     }
+    for (var q = 0; q < 9 ; q++) {
+        carmenCluesArray[q] = clueTemplateArray[q];
+    }
     console.log('Carmen Clues! ', carmenCluesArray);
 }
 
@@ -448,7 +448,6 @@ function countriesTracker(){
 function scoreTracker(){
     $('.total_score').text(player_hint_counter + ' clues gathered!');
 }
-
 var isoLangs = {
     "ab":{
         "name":"Abkhaz",
@@ -1179,4 +1178,3 @@ var isoLangs = {
         "nativeName":"Saɯ cueŋƅ, Saw cuengh"
     }
 };
-
