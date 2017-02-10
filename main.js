@@ -74,6 +74,11 @@ function generate_questions() {
 }
 
 function move_onto_next_country(){
+    if (itineraryIndex >= 3){
+        acceptFinalGuesses();
+        $('#trivia').modal('toggle');
+        return;
+    }
     $('.post_country_win').hide();
     $('p').hide();
     $('.submit_btn').show();
@@ -116,11 +121,6 @@ function submit_trivia_hit(){
         $('.post_country_win').show();
         trivia_question_counter = 0;
         scoreTracker();
-        if (itineraryIndex >= 3){
-            acceptFinalGuesses();
-            $('#trivia').modal('toggle');
-            return;
-        }
         return;
     }
 
@@ -145,52 +145,10 @@ function submit_trivia_hit(){
     }
 }
 
-
-// function submit_trivia_hit(){
-//     $('#question').show();
-//     $('input').show();
-//     $('label').show();
-//     $("input:radio").removeAttr("checked");
-//     console.log('submit trivia button hit');
-//     if(trivia_question_counter_correct === 3){
-//         player_hint_counter++;
-//         console.log('3 correct answers');
-//         setTimeout(function(){
-//             console.log('waiting to close modal');
-//         }, 4000);
-//         display_hints();
-//         //hide modal
-//        /* $('#trivia').modal();*/
-//         //advance on map
-//         trivia_question_counter = 0;
-//         trivia_question_counter_incorrect = 0;
-//         trivia_question_counter_correct = 0;
-//     }
-//     if(last_answer === true){
-//         trivia_question_counter_correct++;
-//         player_correct_counter++;
-//         $('.black_check').hide();
-//         $('.red_check').show();
-//         $('.black_x').show();
-//         $('.red_x').hide();
-//     } else {
-//         trivia_question_counter_incorrect++;
-//         $('.black_check').show();
-//         $('.red_check').hide();
-//         $('.black_x').hide();
-//         $('.red_x').show();
-//     }
-//     if(trivia_question_counter_incorrect === 3){
-//         //hide modal
-//         //lose turn/game
-//         trivia_question_counter = 0;
-//         $('#lose_div').modal('toggle');
-//     }
-// }
-
 var itinerary = [];
 var itineraryIndex = 0;
 var map;
+var wrong_guesses = 0;
 var startMarker;
 var nextMarker;
 var initialLocation = {
@@ -317,10 +275,16 @@ function didWeFindHer(e){
     if (distance < 500000){
         console.log('you got her!');
         $('#win_div').modal();
+        return;
     }
     else{
-        console.log('keep trying! she always goes to a capital!');
-        $('#lose_div').modal();
+        if(wrong_guesses > 4){
+            $('#lose_div').modal();
+            return;
+        }
+        wrong_guesses++;
+        alert('keep trying! Remember she always goes to a capital!');
+
     }
 }
 
