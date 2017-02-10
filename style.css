@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
 body {
     background-size: 100%;
     max-width:100%;
@@ -176,6 +177,6 @@ body {
     font-size: 3vh;
     color: darkred;
 }
-.status_container{
+.status_container {
     width: 30%;
 }
