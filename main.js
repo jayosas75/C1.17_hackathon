@@ -11,6 +11,7 @@ $(document).ready(function(){
     });
     $('#instructions_div').modal('show');
     $('#play_btn').click(function(){
+        $('.post_country_win').hide();
         console.log('markNextLocation');
         $('#instructions_div').modal('hide');
         markNextLocation();
@@ -21,7 +22,9 @@ $(document).ready(function(){
 
     });
     $('.post_country_win').click(function(){
-       move_onto_next_country();
+        console.log('post_country_win hit');
+        move_onto_next_country();
+
     });
 });
 
@@ -44,6 +47,7 @@ function trivia_ajax_call(){
         }
     });
 }
+
 
 function generate_questions() {
     var answer = [];
@@ -70,7 +74,10 @@ function generate_questions() {
 }
 
 function move_onto_next_country(){
-    $('#trivia').modal();
+    $('.post_country_win').hide();
+    $('p').hide();
+    $('.submit_btn').show();
+    $('#trivia').modal('toggle');
     reset_trivia_div_for_question();
     markNextLocation();
 }
@@ -100,14 +107,20 @@ function submit_trivia_hit(){
     console.log('this is the userAnswer ', userAnswer);
 
     if(trivia_question_counter === 3){
+        $('.submit_btn').hide();
         $('.black_check').hide();
         $('.red_check').hide();
         $('.black_x').hide();
         $('.red_x').hide();
         display_hints();
-        $('.submit_btn').addClass('post_country_win');
+        $('.post_country_win').show();
         trivia_question_counter = 0;
         scoreTracker();
+        if (itineraryIndex >= 3){
+            acceptFinalGuesses();
+            $('#trivia').modal('toggle');
+            return;
+        }
         return;
     }
 
@@ -206,10 +219,6 @@ function createMap() {
  * markNextLocation -- looks at the next object in our itinerary array and creates a marker there. also creates a click handler on the first/current marker that will pan you to the new marker
  */
 function markNextLocation(){
-    // if (itineraryIndex = 4){
-    //     acceptFinalGuesses();
-    //     return;
-    // }
     nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
@@ -307,11 +316,11 @@ function didWeFindHer(e){
     console.log('this is the distance to carmen sandiego! ', distance);
     if (distance < 500000){
         console.log('you got her!');
-        $('#win_div').modal('show');
+        $('#win_div').modal();
     }
     else{
         console.log('keep trying! she always goes to a capital!');
-        $('#lose_div').modal('show');
+        $('#lose_div').modal();
     }
 }
 
