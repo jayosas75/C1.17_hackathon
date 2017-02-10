@@ -9,7 +9,6 @@ $(document).ready(function(){
     $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
-    input_click_handlers();
     $('#instructions_div').modal('show');
     $('#play_btn').click(function(){
         console.log('markNextLocation');
@@ -17,35 +16,15 @@ $(document).ready(function(){
         console.log('after - markNextLocation');
     });
 });
+
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
 var last_answer = null;
 var trivia_obj;
-//function/method to initiate game
-//function to disable/enable click on target country
-//function/method to place carmen on map somewhere
-//function to generate trivia modal
-//function/method to generate trivia questions
-function input_click_handlers(){
-    $('#first_choice').click(function(){
-        trivia_question_counter_incorrect++;
-        last_answer = false;
-    });
-    $('#second_choice').click(function(){
-        console.log('correct answer hit');
-        last_answer = true;
-        trivia_question_counter_correct++;
-    });
-    $('#third_choice').click(function(){
-        last_answer = false;
-        trivia_question_counter_incorrect++;
-    });
-    $('#fourth_choice').click(function(){
-        last_answer = false;
-        trivia_question_counter_incorrect++;
-    });
-}
+var trivia_question;
+var currentQuestionObj;
+
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
@@ -76,7 +55,7 @@ function generate_questions() {
     console.log('this is whatever is in answer ', answer);
     console.log('this is the question', question);
 
-    var trivia_question = {
+    trivia_question = {
         question: question,
         answers: answer
     };
@@ -85,108 +64,37 @@ function generate_questions() {
 }
 
 function display_question(trivia_question) {
-    var labelArray = $('label');
+    console.log('this is the trivia_question as passed in ', trivia_question);
+    var inputArray = $('input');
 
-    console.log('this is labelArray ', labelArray);
+    console.log('this is labelArray ', inputArray);
     $('#question').text(trivia_question.question);
 
-    for (var q = 4; q > 0; q++){
+    for (var q = 4; q > 0; q--){
         var randomNumber = Math.floor(Math.random() * q);
-        $(labelArray[q-1]).text('hello');
+        $(inputArray[randomNumber]).next().text(trivia_question.answers[q-1]);
+        inputArray.splice(randomNumber, 1);
+        console.log('this is the random number ', randomNumber);
+        console.log('this is the current answer I want to shove in', trivia_question.answers[q-1]);
+        console.log('this is the current labelArray ',inputArray);
     }
+
 }
-
-//     while (labelArray.length > 0){
-//         var currentAnswer = labelArray.splice(randomNumber, 1);
-//         if (currentAnswer !== undefined) {
-//             $('.answers').append(currentAnswer);
-//         }
-//     }
-// }
-
-
-
-
-    // var question_display = question;
-    // var first_choice = answer_two;
-    // var second_choice = answer_correct;
-    // var third_choice = answer_one;
-    // var fourth_choice = answer_three;
-    // $('#question').text(question_display);
-    // $('#first').text(first_choice);
-    // $('#second').text(second_choice);
-    // $('#third').text(third_choice);
-    // $('#fourth').text(fourth_choice);
-// }
-//
-// function generate_questions(obj){
-//     var question = null;
-//     var answer_one = null;
-//     var answer_two = null;
-//     var answer_three = null;
-//     var answer_correct = null;
-//     for(var i = 0; i < 1; i++){
-//         var index = Math.floor((Math.random() * 50) +1);
-//         question = obj.results[index].question;
-//         answer_one = obj.results[index].incorrect_answers[2];
-//         answer_two = obj.results[index].incorrect_answers[0];
-//         answer_three = obj.results[index].incorrect_answers[1];
-//         answer_correct = obj.results[index].correct_answer;
-//     }
-//     var question_display = question;
-//     var first_choice = answer_two;
-//     var second_choice = answer_correct;
-//     var third_choice = answer_one;
-//     var fourth_choice = answer_three;
-//     $('#question').text(question_display);
-//     $('#first').text(first_choice);
-//     $('#second').text(second_choice);
-//     $('#third').text(third_choice);
-//     $('#fourth').text(fourth_choice);
-// }
-//hit submit on trivia and go to next question
 
 function submit_trivia_hit(){
-    $("input:radio").removeAttr("checked");
+    $("input:radio:checked").removeAttr("checked");
+    var userAnswer = $("input:radio:checked").next().text();
+
     console.log('submit trivia button hit');
-    if(trivia_question_counter_correct === 3){
-        console.log('3 correct answers');
-        setTimeout(function(){
-            console.log('waiting to close modal');
-        }, 4000);
-        //hide modal
-        $('#trivia').modal();
-        //advance on map
-        trivia_question_counter = 0;
-        trivia_question_counter_incorrect = 0;
-        trivia_question_counter_correct = 0;
+    console.log('this is the userAnswer ', userAnswer);
+
+    if (userAnswer == trivia_question.answers[3]) {
+        console.log('you answered correctly!');
+    }else{
+        console.log('you answered incorrectly!');
     }
-    if(last_answer === true){
-        $('.black_check').hide();
-        $('.red_check').show();
-        $('.black_x').show();
-        $('.red_x').hide();
-    } else {
-        $('.black_check').show();
-        $('.red_check').hide();
-        $('.black_x').hide();
-        $('.red_x').show();
-    }
-    if(trivia_question_counter_incorrect === 3){
-        //hide modal
-        //lose turn/game
-        trivia_question_counter = 0;
-        $('#lose_div').modal('toggle');
-    }
-    trivia_question_counter++;
-    $('input').prop('checked', false);
-    setTimeout(generate_questions(), 3000);
 }
-//determine if trivia question is correct
-//if 3 correct questions close modal and update player status and enable click on new country
-//variable to track incorrect answers on trivia modal
-//add click handler for
-//update player status/status indicator on correct/incorrect answer
+
 var itinerary = [];
 var itineraryIndex = 0;
 var map;
