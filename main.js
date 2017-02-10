@@ -13,9 +13,13 @@ $(document).ready(function(){
     $('#instructions_div').modal('show');
     $('#play_btn').click(function(){
         console.log('markNextLocation');
+        $('#instructions_div').modal('hide');
         markNextLocation();
-        console.log('after - markNextLocation');
     });
+    $('.playagain_btn').click(function (){
+        console.log('reset');
+
+    })
 });
 var trivia_question_counter = 0;
 var trivia_question_counter_correct = 0;
