@@ -206,10 +206,11 @@ function markNextLocation(){
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
+        debugger;
+        countriesTracker();
         $('#trivia').modal("toggle");
         trivia_question_counter = 0;
         generate_questions();
-        countriesTracker();
         startMarkerListener.remove(startMarkerListener);
         nextMarkerListener.remove(nextMarkerListener);
 
@@ -302,7 +303,7 @@ function didWeFindHer(e){
     }
     else{
         if(wrong_guesses > 4){
-            $('#country-lose').modal("toggle");
+            alert('Dang! She got away. I\'ll get you next time, Carmen Sandiego!');
             return;
         }
         wrong_guesses++;
@@ -420,7 +421,7 @@ function create_p_for_hints() {
     var new_p7 = $('<p>').addClass('hints7');
     var new_p8 = $('<p>').addClass('hints8');
     var new_p9 = $('<p>').addClass('hints9');
-    $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
+    $('#trivia .modal-body').prepend(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
 }
 
 function reset_trivia_div_for_question(){
@@ -438,15 +439,16 @@ function reset_trivia_div_for_question(){
  */
 
 function countriesTracker(){
+    debugger;
     var newCountry = $('<li>').text(itinerary[itineraryIndex - 1].name);
-    $('.countries > ul').append(newCountry);
+    $('ul').append(newCountry);
 }
 
 /**
  * scoreTracker -- update the score as questions are answered.
  */
 function scoreTracker(){
-    $('.total_score').text(player_hint_counter + ' clues gathered!');
+    $('.to').text(player_hint_counter + ' clues gathered!');
 }
 var isoLangs = {
     "ab":{

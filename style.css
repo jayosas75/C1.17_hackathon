@@ -9,6 +9,7 @@ body {
     background-size: 100%;
     height: 100vh;
     width: 100vw;
+    position:relative;
 }
 .body_container {
     margin-top: 5%;
@@ -60,7 +61,11 @@ body {
     color: darkred;
     text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
 }
-li:nth-child(1) {
+ul{
+    list-style-type:none;
+    text-align:center;
+}
+li {
     margin-top: 45%;
     margin-left: 10%;
     width: 50%;
@@ -299,6 +304,21 @@ li:nth-child(3){
 }
 
 #real_win{
-    background-color: white;
+    font-size: 0;
+    background-image: url("img/win_condition.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: auto;
+    width: 45%;
+    height: 70%;
+    position:absolute;
+    left:25%;
 }
 
+p{
+    font-size:initial;
+}
+
+ul{
+    font-size: initial;
+}
