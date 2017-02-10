@@ -394,3 +394,11 @@ function countriesTracker(){
     var newCountry = $('<li>').text(itinerary[itineraryIndex].name);
     $('.countries > ul').append(newCountry);
 }
+
+/**
+ * scoreTracker -- update the score as questions are answered.
+ */
+
+function scoreTracker(){
+    $('.total_score').text(player_hint_counter + 'clues gathered!');
+}
