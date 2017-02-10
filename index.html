@@ -19,14 +19,14 @@
 
     <body>
     <div class ='fix_body'>
-        <div class="total_score">
-            Total Score
+        <div class="status_container">
+            <div class="total_score">
+                Total Score
+            </div>
+            <div class="countries">
+                Countries
+            </div>
         </div>
-
-        <div class="countries">
-            Countries
-        </div>
-
         <div class="map">
             <div id="googleMap"></div>
         </div>
@@ -53,14 +53,17 @@
                             <div class="question_number"></div>
                             <div class="correct_number"></div>
                             <div>/8</div>-->
+
                                 <div class="modal-body">
                                     <h2 id="question"></h2>
 
                                     <div class="answers">
+
                                         <input type="radio" name="answers" id="first_choice"> <label for="first_choice" id="first" class="0"></label>
                                         <input type="radio" name="answers" id="second_choice"> <label for="second_choice" id="second" class="1"></label>
                                         <input type="radio" name="answers" id="third_choice"> <label for="third_choice" id="third" class="2"></label>
                                         <input type="radio" name="answers" id="fourth_choice"> <label for="fourth_choice" id="fourth" class="3"></label>
+
                                     </div>
                                 <button class="submit_btn">SUBMIT</button>
                                 <div>
@@ -144,14 +147,14 @@
         <!-- Modal for Win Condition-->
         <div id='win_div' class="modal">
             <div class="win">
-                <img class= 'playagain_btn' src="img/play_again.jpg">
+                <button class="playagain_btn">PLAY AGAIN</button>
             </div>
         </div>
 
         <!-- Modal for Lose Condition-->
         <div id='lose_div' class="modal">
             <div class="lose">
-                <img class= 'playagain_btn' src="img/play_again.jpg">
+                <button class="playagain_btn">PLAY AGAIN</button>
             </div>
         </div>
     </div>

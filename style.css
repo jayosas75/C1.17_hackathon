@@ -88,13 +88,11 @@ body {
     height: 70%;
 }
 .playagain_btn {
-    width: 20%;
+    width: 18%;
+    padding: 1.5%;
     margin-left: 40%;
+    font-size: 2vh;    margin-left: 40%;
     margin-top: 58%;
-}
-
-label {
-    margin-right: 100vh;
 }
 
 #answer {
@@ -108,15 +106,15 @@ label {
 
 .total_score {
     position: absolute;
-    font-size: 20px;
-    margin-top: 16%;
-    margin-left: 14%;
+    font-size: 5vh;
+    margin-top: 22%;
+    margin-left: 11%;
 }
 .countries {
     position: absolute;
-    font-size: 20px;
-    margin-top: 22%;
-    margin-left: 14%;
+    font-size: 5vh;
+    margin-top: 29%;
+    margin-left: 12%;
 }
 .new_instructions{
     font-size: 20px;
@@ -171,8 +169,13 @@ label {
 }
 
 .answers{
-    width: 50%;
+    width: 140%;
+    margin: 0;
 }
 .choices{
-    font-size: 2vh;
+    font-size: 3vh;
+    color: darkred;
+}
+.status_container{
+    width: 30%;
 }
