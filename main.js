@@ -27,7 +27,6 @@ $(document).ready(function(){
     $('.post_country_win').click(function(){
         console.log('post_country_win hit');
         move_onto_next_country();
-
     });
 });
 
@@ -108,24 +107,11 @@ function display_question(trivia_question) {
 }
 
 function submit_trivia_hit(){
-    $("input:radio").attr("checked", false);
     var userAnswer = $("input:radio:checked").next().text();
+    $("input:radio:checked").attr("checked", false);
 
     console.log('submit trivia button hit');
     console.log('this is the userAnswer ', userAnswer);
-
-    if(trivia_question_counter === 3){
-        $('.submit_btn').hide();
-        $('.black_check').hide();
-        $('.red_check').hide();
-        $('.black_x').hide();
-        $('.red_x').hide();
-        display_hints();
-        $('.post_country_win').show();
-        trivia_question_counter = 0;
-        scoreTracker();
-        return;
-    }
 
     var correctAnswer = decodeURIComponent(trivia_question.answers[3]);
 
@@ -136,17 +122,38 @@ function submit_trivia_hit(){
         $('.red_check').show();
         $('.black_x').show();
         $('.red_x').hide();
-        generate_questions();
-
+        setTimeout(function() {
+            $('.red_check').hide();
+            $('.black_check').show();
+            endCountryTriviaCheck();
+            generate_questions();
+        }, 1000);
     }else {
         console.log('you answered incorrectly!');
         $('.black_check').show();
         $('.red_check').hide();
         $('.black_x').hide();
         $('.red_x').show();
+        setTimeout(function() {
+            $('.black_x').show();
+            $('.red_x').hide();
+            endCountryTriviaCheck();
+            generate_questions();
+        }, 1000);
+    }
+}
 
-        generate_questions();
-
+function endCountryTriviaCheck(){
+    if(trivia_question_counter === 3){
+        $('.submit_btn').hide();
+        $('.black_check').hide();
+        $('.red_check').hide();
+        $('.black_x').hide();
+        $('.red_x').hide();
+        display_hints();
+        $('.post_country_win').show();
+        trivia_question_counter = 0;
+        scoreTracker();
     }
 }
 
@@ -187,9 +194,12 @@ function markNextLocation(){
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
     });
-    nextMarker.setMap(map);
+    if (itineraryIndex < 3) {
+        nextMarker.setMap(map);
+    }
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
+
 
     var startMarkerListener = startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
@@ -197,6 +207,7 @@ function markNextLocation(){
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
         $('#trivia').modal("toggle");
+        trivia_question_counter = 0;
         generate_questions();
         countriesTracker();
         startMarkerListener.remove(startMarkerListener);
@@ -312,7 +323,7 @@ function generateCarmenClues(){
         "It looks like Carmen dropped a scrap of paper. The words on it look like they're in " + itinerary[3]['languages'] + ".",
         "It seems like Carmen's heading off somewhere in " + itinerary[3]['region'] + ".",
         "Hm... it seems like Carmen's heading to somewhere in " + itinerary[3]['subregion'] + ".",
-        "Looks like Carmen dropped her watch. Going by my calculations, her watch is set for " + itinerary[3]['timezone'] + " time zone.",
+        "Looks like Carmen dropped her watch. Going by my calculations, her watch is set for " + itinerary[3]['timezones'] + " time zone.",
         "A few bills fell out of Carmen's pocket! Looks like they are " + itinerary[3]['currency'] + ".",
         "She dropped a scrap of paper with a country crossed off! Maybe" + itinerary[3]['borders'] + " this is near where she's headed!",
         "Carmen dropped yet another scrap of paper with a URL on it. I can't quite make out the URL, but the top-level domain is " + itinerary[3]['topLevelDomain'] + "!",
