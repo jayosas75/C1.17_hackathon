@@ -1,8 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
 body {
-    background: url("img/background.jpg") no-repeat center center;
-    background-size: cover;
+    background-size: 100%;
+    max-width:100%;
+    max-height:100%;
     height: 100vh;
     width: 100vw;
+    background: url("img/background.jpg") no-repeat center center;
+    background-size: cover;
     margin: 0;
 }
 
@@ -16,7 +23,7 @@ body {
     background-color: white;
     font-size: 20vh;
     width: 44%;
-    height: 74%;
+    height: 82%;
     left: 34%;
     top: 8%;
     border: 5px black solid;
@@ -48,42 +55,26 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    border: 1px solid #888;
     width: 45%;
     height: 70%;
 }
-.play_btn {
-    width: 20%;
-    margin-left: 40%;
-    margin-top: 58%;
-}
+
 .trivia {
+    padding: 1%;
     background-image: url("img/modal_background.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    border: 1px solid #888;
     width: 45%;
     height: 70%;
 }
-.submit_btn {
-    width: 20%;
-    margin-left: 40%;
-    margin-top: 58%;
-}
-.right{
 
-}
-.wrong{
-
-}
 .win {
     font-size: 0;
     background-image: url("img/win_condition.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    border: 1px solid #888;
     width: 45%;
     height: 70%;
 }
@@ -93,7 +84,6 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    border: 1px solid #888;
     width: 45%;
     height: 70%;
 }
@@ -103,7 +93,7 @@ body {
     margin-top: 58%;
 }
 
-span {
+label {
     margin-right: 100vh;
 }
 
@@ -127,4 +117,58 @@ span {
     font-size: 20px;
     margin-top: 22%;
     margin-left: 14%;
+}
+.new_instructions{
+    font-size: 20px;
+    margin-top: 14%;
+    margin-left: 10%;
+    width: 50%;
+}
+.instructions_header{
+    font-size: 8vh;
+    padding: 0;
+    margin: 0;
+    margin-left: 37%;
+}
+#play_btn{
+    width: 18%;
+    padding: 1.5%;
+    margin-left: 40%;
+    font-size: 3vh;
+}
+.submit_btn{
+    width: 18%;
+    padding: 1.5%;
+    margin-left: 40%;
+    font-size: 3vh;
+}
+
+.right{
+    position: relative;
+
+}
+.black_check{
+    position: absolute;
+}
+.red_check{
+    position: absolute;
+}
+.wrong{
+    position: relative;
+    margin-left: 10%;
+}
+.black_x{
+    position: absolute;
+}
+.red_x{
+    position: absolute;
+}
+.modal-body{
+    width: 69%;
+}
+#question{
+    font-size: 10vh;
+}
+input{
+    font-size: 10vh;
 }
