@@ -56,7 +56,7 @@ function generate_questions() {
     var index = Math.floor((Math.random() * 50) + 1);
 
     var currentQuestion = trivia_obj['results'][index];
-    trivia_obj['results'][index].splice(index, 1);
+    //trivia_obj['results'][index].splice(index, 1);
 
     var question = currentQuestion.question;
 
