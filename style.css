@@ -12,13 +12,11 @@ body {
     background-size: cover;
     margin: 0;
 }
-
 .fix_body {
     height: 100%;
     width: 100%;
     position: relative;
 }
-
 .map{
     background-color: white;
     font-size: 20vh;
@@ -29,12 +27,10 @@ body {
     border: 5px black solid;
     position: absolute;
 }
-
 #googleMap{
     width:100%;
     height: 100%;
 }
-
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -48,7 +44,6 @@ body {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 .instructions {
     font-size: 0;
     background-image: url("img/instructions.jpg");
@@ -131,15 +126,13 @@ body {
     font-size: 3vh;
 }
 .submit_btn{
-    width: 18%;
+    width: 25%;
     padding: 1.5%;
     margin-left: 40%;
     font-size: 3vh;
 }
-
 .right{
     position: relative;
-
 }
 .black_check{
     position: absolute;
@@ -149,7 +142,7 @@ body {
 }
 .wrong{
     position: relative;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 .black_x{
     position: absolute;
@@ -163,7 +156,6 @@ body {
 #question{
     font-size: 3vh;
 }
-
 .answers{
     width: 140%;
     margin: 0;
