@@ -56,6 +56,8 @@ function generate_questions() {
     var index = Math.floor((Math.random() * 50) + 1);
 
     var currentQuestion = trivia_obj['results'][index];
+    trivia_obj['results'][index].splice(index, 1);
+
     var question = currentQuestion.question;
 
     for (var i = 0; i < 3; i++){
@@ -206,7 +208,6 @@ function markNextLocation(){
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
-        debugger;
         countriesTracker();
         $('#trivia').modal("toggle");
         trivia_question_counter = 0;
@@ -439,7 +440,6 @@ function reset_trivia_div_for_question(){
  */
 
 function countriesTracker(){
-    debugger;
     var newCountry = $('<li>').text(itinerary[itineraryIndex - 1].name);
     $('ul').append(newCountry);
 }
