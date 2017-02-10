@@ -12,8 +12,13 @@ $(document).ready(function(){
     $('#instructions_div').modal('show');
     $('#play_btn').click(function(){
         console.log('markNextLocation');
+        $('#instructions_div').modal('hide');
         markNextLocation();
-        console.log('after - markNextLocation');
+    });
+    generateCarmenClues();
+    $('.playagain_btn').click(function (){
+        console.log('reset');
+
     });
 });
 
@@ -23,7 +28,8 @@ var trivia_question_counter_incorrect = 0;
 var last_answer = null;
 var trivia_obj;
 var trivia_question;
-var currentQuestionObj;
+var player_correct_counter = 0;
+var player_hint_counter = 0;
 
 function trivia_ajax_call(){
     $.ajax({
@@ -61,6 +67,7 @@ function generate_questions() {
     };
 
     display_question(trivia_question);
+    trivia_question_counter++;
 }
 
 function display_question(trivia_question) {
@@ -78,7 +85,6 @@ function display_question(trivia_question) {
         console.log('this is the current answer I want to shove in', trivia_question.answers[q-1]);
         console.log('this is the current labelArray ',inputArray);
     }
-
 }
 
 function submit_trivia_hit(){
@@ -90,10 +96,53 @@ function submit_trivia_hit(){
 
     if (userAnswer == trivia_question.answers[3]) {
         console.log('you answered correctly!');
-    }else{
+    }else {
         console.log('you answered incorrectly!');
     }
 }
+
+
+// function submit_trivia_hit(){
+//     $('#question').show();
+//     $('input').show();
+//     $('label').show();
+//     $("input:radio").removeAttr("checked");
+//     console.log('submit trivia button hit');
+//     if(trivia_question_counter_correct === 3){
+//         player_hint_counter++;
+//         console.log('3 correct answers');
+//         setTimeout(function(){
+//             console.log('waiting to close modal');
+//         }, 4000);
+//         display_hints();
+//         //hide modal
+//        /* $('#trivia').modal();*/
+//         //advance on map
+//         trivia_question_counter = 0;
+//         trivia_question_counter_incorrect = 0;
+//         trivia_question_counter_correct = 0;
+//     }
+//     if(last_answer === true){
+//         trivia_question_counter_correct++;
+//         player_correct_counter++;
+//         $('.black_check').hide();
+//         $('.red_check').show();
+//         $('.black_x').show();
+//         $('.red_x').hide();
+//     } else {
+//         trivia_question_counter_incorrect++;
+//         $('.black_check').show();
+//         $('.red_check').hide();
+//         $('.black_x').hide();
+//         $('.red_x').show();
+//     }
+//     if(trivia_question_counter_incorrect === 3){
+//         //hide modal
+//         //lose turn/game
+//         trivia_question_counter = 0;
+//         $('#lose_div').modal('toggle');
+//     }
+// }
 
 var itinerary = [];
 var itineraryIndex = 0;
@@ -180,6 +229,7 @@ function callRESTCountries(){
         method: 'GET',
         success: function(response){
             createItinerary(response);
+            console.log('john: ', response)
         },
         error: function(){
             console.log('the call did not work...');
@@ -209,7 +259,7 @@ function acceptFinalGuesses(){
     map.addListener('click', function(e){
         console.log('a guess was made!');
         didWeFindHer(e);
-    })
+    });
 }
 /**
  * didWeFindHer -- checks if the user's guess is within a certain distance of carmen sandiego's actual location
@@ -257,4 +307,80 @@ function generateCarmenClues(){
          carmenCluesArray[q] = clueTemplateArray[q];
      }
     console.log('Carmen Clues! ', carmenCluesArray);
+}
+
+function display_hints() {
+    //display right after u beat country
+    $('#question').hide();
+    $('input').hide();
+    $('label').hide();
+    create_p_for_hints();
+    if (player_hint_counter === 1) {
+        $('.hints1').text(carmenCluesArray[0]);
+    } else if(player_hint_counter === 2) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+    } else if(player_hint_counter === 3) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+    } else if(player_hint_counter === 4) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+    } else if(player_hint_counter === 5) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+    } else if(player_hint_counter === 6) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+    } else if(player_hint_counter === 7) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+    } else if(player_hint_counter === 8) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+        $('.hints8').text(carmenCluesArray[7]);
+    } else if(player_hint_counter === 9) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+        $('.hints8').text(carmenCluesArray[7]);
+        $('.hints9').text(carmenCluesArray[8]);
+    }
+}
+
+function create_p_for_hints(){
+    var new_p1 = $('<p>').addClass('hints1');
+    var new_p2 = $('<p>').addClass('hints2');
+    var new_p3 = $('<p>').addClass('hints3');
+    var new_p4 = $('<p>').addClass('hints4');
+    var new_p5 = $('<p>').addClass('hints5');
+    var new_p6 = $('<p>').addClass('hints6');
+    var new_p7 = $('<p>').addClass('hints7');
+    var new_p8 = $('<p>').addClass('hints8');
+    var new_p9 = $('<p>').addClass('hints9');
+    $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
 }
