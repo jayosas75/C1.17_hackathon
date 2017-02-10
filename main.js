@@ -28,15 +28,23 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * globals -- global variables to keep track of trivia object, question, hint counter, and number of questions asked.
+ */
+
 var trivia_question_counter = 0;
 var trivia_obj;
 var trivia_question;
 var player_hint_counter = 0;
 
+/**
+ * trivia_ajax_call -- pull information from trivia database to put into trivia game.
+ */
+
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
-        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple"),
+        url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50")+ encodeURIComponent("&category=9") + encodeURIComponent("&type=multiple"),
         method: "GET",
         success: function(results) {
             console.log('AJAX Success function called, with the following result:', results);
@@ -47,6 +55,9 @@ function trivia_ajax_call(){
         }
     });
 }
+/**
+ * generate_questions -- function to generate questions at random
+ */
 
 
 function generate_questions() {
@@ -73,6 +84,10 @@ function generate_questions() {
     trivia_question_counter++;
 }
 
+/**
+ * move_onto_next_country --  function to move on from hints screen into either final round or next round of questions.
+ */
+
 function move_onto_next_country(){
     if (itineraryIndex >= 3){
         acceptFinalGuesses();
@@ -86,6 +101,11 @@ function move_onto_next_country(){
     reset_trivia_div_for_question();
     markNextLocation();
 }
+
+/**
+ * display_question -- takes generate question and answers and displays them in trivia modal
+ * @param trivia_question
+ */
 
 function display_question(trivia_question) {
     console.log('this is the trivia_question as passed in ', trivia_question);
@@ -103,6 +123,11 @@ function display_question(trivia_question) {
         console.log('this is the current labelArray ',inputArray);
     }
 }
+
+/**
+ * submit_trivia_hit -- function to keep displaying questions until after 3 total each round
+ * -- will also display score in the scoreboard.
+ */
 
 function submit_trivia_hit(){
     $("input:radio").attr("checked", false);
@@ -144,6 +169,10 @@ function submit_trivia_hit(){
 
     }
 }
+
+/**
+ * more globals -- globals to keep track of itinerary and markers for google maps
+ */
 
 var itinerary = [];
 var itineraryIndex = 0;
@@ -314,6 +343,10 @@ function generateCarmenClues(){
     console.log('Carmen Clues! ', carmenCluesArray);
 }
 
+/**
+ * display_hints -- hides everything in current modal and displays earned hints.
+ */
+
 function display_hints() {
     //display right after u beat country
     $('.black_check').hide();
@@ -381,6 +414,10 @@ function display_hints() {
     }
 }
 
+/**
+ * create_p_tags_for hints -- function to dynamically create paragraphs for insertion of trivia modal
+ */
+
 function create_p_for_hints() {
     var new_p1 = $('<p>').addClass('hints1');
     var new_p2 = $('<p>').addClass('hints2');
@@ -393,6 +430,10 @@ function create_p_for_hints() {
     var new_p9 = $('<p>').addClass('hints9');
     $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
 }
+
+/**
+ * reset_trivia_div_for_questions -- function to reset trivia modal to its former glory
+ */
 
 function reset_trivia_div_for_question(){
     $('#question').show();
