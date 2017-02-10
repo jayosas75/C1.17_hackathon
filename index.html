@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Carmen Sandiego</title>
-    <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="https://weglot.com/api/weglot.js"></script>
+    <head>
+        <title>Carmen Sandiego</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <script type="text/javascript" src="https://weglot.com/api/weglot.js"></script>
 
-    <!--<script type="text/javascript" src="https://weglot.com/api/weglot.js"></script>-->
+        <!--<script type="text/javascript" src="https://weglot.com/api/weglot.js"></script>-->
 
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18&libraries=geometry&callback=createMap"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18&libraries=geometry&callback=createMap"></script>
 
-</head>
+    </head>
 
-<body>
-<div class ='fix_body'>
-    <div class="total_score">
-        Total Score
-    </div>
-
-    <div class="countries">
-        Countries
-    </div>
-
-    <div class="map">
-        <div id="googleMap"></div>
-    </div>
-
-
-    <!-- Modal for Instructions -->
-    <div id='instructions_div' class="modal">
-        <div class="instructions">
-            <div class="instructions_header">Instructions</div>
-            <div class="new_instructions">
-                <p>- Follow Carmen Sandiego as she escapes to different countries</p>
-                <p>- Each country has 8 trivia questions for you to answer</p>
-                <p>- Get at least 3 questions correct from each country to follow Carmen to the next one</p>
-                <p>- When you reach the final country, if you get three questions correct, you capture the international criminal!</p>
+    <body>
+    <div class ='fix_body'>
+        <div class="status_container">
+            <div class="total_score">
+                Total Score
             </div>
+            <div class="countries">
+                Countries
+            </div>
+        </div>
+        <div class="map">
+            <div id="googleMap"></div>
+        </div>
+
+
+        <!-- Modal for Instructions -->
+        <div id='instructions_div' class="modal">
+            <div class="instructions">
+                <div class="instructions_header">Instructions</div>
+                <div class="new_instructions">
+                    <p>- Follow Carmen Sandiego as she escapes to different countries</p>
+                    <p>- Each country has 8 trivia questions for you to answer</p>
+                    <p>- Get at least 3 questions correct from each country to follow Carmen to the next one</p>
+                    <p>- When you reach the final country, if you get three questions correct, you capture the international criminal!</p>
+                </div>
             <button id="play_btn">PLAY</button>
         </div>
     </div>
@@ -141,16 +142,17 @@
         <!-- Modal for Win Condition-->
         <div id='win_div' class="modal">
             <div class="win">
-                <img class= 'playagain_btn' src="img/play_again.jpg">
+                <button class="playagain_btn">PLAY AGAIN</button>
             </div>
         </div>
 
         <!-- Modal for Lose Condition-->
         <div id='lose_div' class="modal">
             <div class="lose">
-                <img class= 'playagain_btn' src="img/play_again.jpg">
+                <button class="playagain_btn">PLAY AGAIN</button>
             </div>
         </div>
     </div>
-</body>
+    </div>
+    </body>
 </html>

@@ -1,27 +1,42 @@
+<<<<<<< HEAD
 /**
  * translation API --  translate from english to ten other languages
  */
+=======
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
 Weglot.setup({
     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
     originalLanguage: 'en',
     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
 });
+<<<<<<< HEAD
 
 /**
  * on page load --  call trivia and click handlers
  */
+=======
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
 $(document).ready(function(){
     console.log('document ready');
     trivia_ajax_call();
     $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
-    input_click_handlers();
     $('#instructions_div').modal('show');
     $('#play_btn').click(function(){
         console.log('markNextLocation');
         $('#instructions_div').modal('hide');
         markNextLocation();
+<<<<<<< HEAD
+=======
+    });
+    generateCarmenClues();
+    $('.playagain_btn').click(function (){
+        console.log('reset');
+
+    });
+});
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
 
     });
 });
@@ -30,6 +45,7 @@ var trivia_question_counter_correct = 0;
 var trivia_question_counter_incorrect = 0;
 var last_answer = null;
 var trivia_obj;
+<<<<<<< HEAD
 //function/method to initiate game
 //function to disable/enable click on target country
 //function/method to place carmen on map somewhere
@@ -54,6 +70,12 @@ function input_click_handlers(){
         trivia_question_counter_incorrect++;
     });
 }
+=======
+var trivia_question;
+var player_correct_counter = 0;
+var player_hint_counter = 0;
+
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
 function trivia_ajax_call(){
     $.ajax({
         dataType: 'json',
@@ -68,6 +90,7 @@ function trivia_ajax_call(){
         }
     });
 }
+<<<<<<< HEAD
 function generate_questions(obj){
     var question = null;
     var answer_one = null;
@@ -141,6 +164,107 @@ function submit_trivia_hit(){
 //variable to track incorrect answers on trivia modal
 //add click handler for
 //update player status/status indicator on correct/incorrect answer
+=======
+
+function generate_questions() {
+    var answer = [];
+    var index = Math.floor((Math.random() * 50) + 1);
+
+    var currentQuestion = trivia_obj['results'][index];
+    var question = currentQuestion.question;
+
+    for (var i = 0; i < 3; i++){
+        answer[i] = currentQuestion.incorrect_answers[i];
+    }
+    answer[3] = currentQuestion.correct_answer;
+
+    console.log('this is whatever is in answer ', answer);
+    console.log('this is the question', question);
+
+    trivia_question = {
+        question: question,
+        answers: answer
+    };
+
+    display_question(trivia_question);
+    trivia_question_counter++;
+}
+
+function display_question(trivia_question) {
+    console.log('this is the trivia_question as passed in ', trivia_question);
+    var inputArray = $('input');
+
+    console.log('this is labelArray ', inputArray);
+    $('#question').text(trivia_question.question);
+
+    for (var q = 4; q > 0; q--){
+        var randomNumber = Math.floor(Math.random() * q);
+        $(inputArray[randomNumber]).next().text(trivia_question.answers[q-1]);
+        inputArray.splice(randomNumber, 1);
+        console.log('this is the random number ', randomNumber);
+        console.log('this is the current answer I want to shove in', trivia_question.answers[q-1]);
+        console.log('this is the current labelArray ',inputArray);
+    }
+}
+
+function submit_trivia_hit(){
+    $("input:radio:checked").removeAttr("checked");
+    var userAnswer = $("input:radio:checked").next().text();
+
+    console.log('submit trivia button hit');
+    console.log('this is the userAnswer ', userAnswer);
+
+    if (userAnswer == trivia_question.answers[3]) {
+        console.log('you answered correctly!');
+    }else {
+        console.log('you answered incorrectly!');
+    }
+}
+
+
+// function submit_trivia_hit(){
+//     $('#question').show();
+//     $('input').show();
+//     $('label').show();
+//     $("input:radio").removeAttr("checked");
+//     console.log('submit trivia button hit');
+//     if(trivia_question_counter_correct === 3){
+//         player_hint_counter++;
+//         console.log('3 correct answers');
+//         setTimeout(function(){
+//             console.log('waiting to close modal');
+//         }, 4000);
+//         display_hints();
+//         //hide modal
+//        /* $('#trivia').modal();*/
+//         //advance on map
+//         trivia_question_counter = 0;
+//         trivia_question_counter_incorrect = 0;
+//         trivia_question_counter_correct = 0;
+//     }
+//     if(last_answer === true){
+//         trivia_question_counter_correct++;
+//         player_correct_counter++;
+//         $('.black_check').hide();
+//         $('.red_check').show();
+//         $('.black_x').show();
+//         $('.red_x').hide();
+//     } else {
+//         trivia_question_counter_incorrect++;
+//         $('.black_check').show();
+//         $('.red_check').hide();
+//         $('.black_x').hide();
+//         $('.red_x').show();
+//     }
+//     if(trivia_question_counter_incorrect === 3){
+//         //hide modal
+//         //lose turn/game
+//         trivia_question_counter = 0;
+//         $('#lose_div').modal('toggle');
+//     }
+// }
+
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
 var itinerary = [];
 var itineraryIndex = 0;
 var map;
@@ -183,14 +307,28 @@ function markNextLocation(){
     nextMarker.setMap(map);
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
+<<<<<<< HEAD
     startMarker.addListener('click', function(){
+=======
+
+    var startMarkerListener = startMarker.addListener('click', function(){
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
         map.panTo(nextMarker.getPosition());
-        startMarker = nextMarker;
     });
+<<<<<<< HEAD
     nextMarker.addListener('click', function(){
         console.log('we should be able to a dang modal');
         $('#trivia').modal();
         generate_questions(trivia_obj);
+=======
+
+    var nextMarkerListener = nextMarker.addListener('click', function(){
+        $('#trivia').modal();
+        generate_questions();
+        startMarkerListener.remove(startMarkerListener);
+        nextMarkerListener.remove(nextMarkerListener);
+        startMarker = nextMarker;
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
     });
     itineraryIndex++;
 }
@@ -223,6 +361,7 @@ function callRESTCountries(){
         method: 'GET',
         success: function(response){
             createItinerary(response);
+            console.log('john: ', response)
         },
         error: function(){
             console.log('the call did not work...');
@@ -252,7 +391,7 @@ function acceptFinalGuesses(){
     map.addListener('click', function(e){
         console.log('a guess was made!');
         didWeFindHer(e);
-    })
+    });
 }
 /**
  * didWeFindHer -- checks if the user's guess is within a certain distance of carmen sandiego's actual location
@@ -274,4 +413,110 @@ function didWeFindHer(e){
         console.log('keep trying! she always goes to a capital!');
         $('#lose_div').modal('show');
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+/**
+ * generateCarmenClues -- pull information from the itinerary to generate carmen clues for the final win
+ */
+
+var carmenCluesArray = [];
+var cluePropertyArray = ['population', 'languages', 'region', 'subregion', 'timezone', 'currency', 'borders', 'topLevelDomain','capital'];
+
+function generateCarmenClues(){
+
+    var clueTemplateArray =[
+        "It seems like the country that Carmen's heading to has a population around " + itinerary[3]['population'] + ".",
+        "It looks like Carmen dropped a scrap of paper. The words on it look like they're in : " + itinerary[3]['languages'] + ".",
+        "It seems like Carmen's heading off somewhere in " + itinerary[3]['region'] + ".",
+        "Hm... it seems like Carmen's heading to somewhere in " + itinerary[3]['subregion'] + ".",
+        "Looks like Carmen dropped her watch. Going by my calculations, her watch is set for " + itinerary[3]['timezone'] + " time zone.",
+        "A few bills fell out of Carmen's pocket! Looks like they are " + itinerary[3]['currency'] + ".",
+        "She dropped a scrap of paper with a country crossed off! Maybe" + itinerary[3]['borders'] + " this is near where she's headed!",
+        "Carmen dropped yet another scrap of paper with a URL on it. I can't quite make out the URL, but the top-level domain is " + itinerary[3]['topLevelDomain'] + "!",
+        "She dropped a tourism brochure. She's headed to " + itinerary[3]['capital'] + "!"];
+
+     for (var q = 0; q < 9 ; q++) {
+         carmenCluesArray[q] = clueTemplateArray[q];
+     }
+    console.log('Carmen Clues! ', carmenCluesArray);
+}
+
+function display_hints() {
+    //display right after u beat country
+    $('#question').hide();
+    $('input').hide();
+    $('label').hide();
+    create_p_for_hints();
+    if (player_hint_counter === 1) {
+        $('.hints1').text(carmenCluesArray[0]);
+    } else if(player_hint_counter === 2) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+    } else if(player_hint_counter === 3) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+    } else if(player_hint_counter === 4) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+    } else if(player_hint_counter === 5) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+    } else if(player_hint_counter === 6) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+    } else if(player_hint_counter === 7) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+    } else if(player_hint_counter === 8) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+        $('.hints8').text(carmenCluesArray[7]);
+    } else if(player_hint_counter === 9) {
+        $('.hints1').text(carmenCluesArray[0]);
+        $('.hints2').text(carmenCluesArray[1]);
+        $('.hints3').text(carmenCluesArray[2]);
+        $('.hints4').text(carmenCluesArray[3]);
+        $('.hints5').text(carmenCluesArray[4]);
+        $('.hints6').text(carmenCluesArray[5]);
+        $('.hints7').text(carmenCluesArray[6]);
+        $('.hints8').text(carmenCluesArray[7]);
+        $('.hints9').text(carmenCluesArray[8]);
+    }
+}
+
+function create_p_for_hints(){
+    var new_p1 = $('<p>').addClass('hints1');
+    var new_p2 = $('<p>').addClass('hints2');
+    var new_p3 = $('<p>').addClass('hints3');
+    var new_p4 = $('<p>').addClass('hints4');
+    var new_p5 = $('<p>').addClass('hints5');
+    var new_p6 = $('<p>').addClass('hints6');
+    var new_p7 = $('<p>').addClass('hints7');
+    var new_p8 = $('<p>').addClass('hints8');
+    var new_p9 = $('<p>').addClass('hints9');
+    $('.modal-body').append(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
+}
+>>>>>>> c44db0955f07363a03dd3679924cc0fc8c1d18f0
