@@ -275,6 +275,9 @@ function createItinerary(response){
  * acceptFinalGuesses -- initiates the final mode of the game where the user can input clicks onto the map to guess where carmen sandiego is by creating a listener on the whole map for a click
  */
 function acceptFinalGuesses(){
+    setTimeout(function(){
+        alert('You have entered the final phase of your investigation. Guess where Carmen Sandiego is hiding by clicking on the map!');
+    }, 1000);
     map.addListener('click', function(e){
         console.log('a guess was made!');
         didWeFindHer(e);
@@ -303,8 +306,7 @@ function didWeFindHer(e){
             return;
         }
         wrong_guesses++;
-        alert('keep trying! Remember she always goes to a capital!');
-
+        alert('keep trying! Hint: She always goes to a capital city!');
     }
 }
 

@@ -178,3 +178,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
+#real_win{
+    background-color: white;
+}
