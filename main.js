@@ -443,7 +443,6 @@ function countriesTracker(){
 /**
  * scoreTracker -- update the score as questions are answered.
  */
-
 function scoreTracker(){
     $('.total_score').text(player_hint_counter + ' clues gathered!');
 }
