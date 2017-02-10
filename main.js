@@ -85,16 +85,16 @@ function generate_questions() {
 }
 
 function display_question(trivia_question) {
-    var labelArray = $('.labeldiv').contents();
-    var randomNumber = Math.floor(Math.random() * 4);
-    var randomTrack = [0,1,2,3];
+    var labelArray = $('label');
+
+    console.log('this is labelArray ', labelArray);
     $('#question').text(trivia_question.question);
 
-    while(randomTrack.length > 0){
-
+    for (var q = 4; q > 0; q++){
+        var randomNumber = Math.floor(Math.random() * q);
+        $(labelArray[q-1]).text('hello');
     }
 }
-    console.log('this is labelArray ', labelArray);
 
 //     while (labelArray.length > 0){
 //         var currentAnswer = labelArray.splice(randomNumber, 1);
