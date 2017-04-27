@@ -1,21 +1,20 @@
-Weglot.setup({
-    api_key: 'wg_2fce281d81d90095a77029ebf6244897',
-    originalLanguage: 'en',
-    destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
-});
+// Weglot.setup({
+//     api_key: 'wg_2fce281d81d90095a77029ebf6244897',
+//     originalLanguage: 'en',
+//     destinationLanguages : 'fr,es,ar,it,ko,de,ru,pt,ja,zh'
+// });
 
 callRESTCountries();
 
 $(document).ready(function(){
-    console.log('document ready');
     trivia_ajax_call();
     $('.submit_btn').click(function(){
         submit_trivia_hit();
     });
-    $('#instructions_div').modal("toggle");
+    $('#instructions_div').modal({backdrop: false, keyboard: false});
     $('#play_btn').click(function(){
         $('.post_country_win').hide();
-        $('#instructions_div').modal("toggle");
+        $('#instructions_div').hide();
         markNextLocation();
     });
     generateCarmenClues();
@@ -72,23 +71,22 @@ function generate_questions() {
 function move_onto_next_country(){
     if (itineraryIndex >= 3){
         acceptFinalGuesses();
-        $('#trivia').modal("toggle");
+        $('#trivia').modal({backdrop: "static", keyboard: false});
         return;
     }
     $('.post_country_win').hide();
     $('p').hide();
     $('.submit_btn').show();
-    $('#trivia').modal("toggle");
+    $('#trivia').modal({backdrop: "static", keyboard: false});
     reset_trivia_div_for_question();
     markNextLocation();
 }
 
 function display_question(trivia_question) {
-    console.log('this is the trivia_question as passed in ', trivia_question);
     var inputArray = $('input');
 
     $('#question').text(decodeURIComponent(trivia_question.question));
-]    for (var q = 4; q > 0; q--){
+    for (var q = 4; q > 0; q--){
         var randomNumber = Math.floor(Math.random() * q);
         $(inputArray[randomNumber]).next().text(decodeURIComponent(trivia_question.answers[q-1]));
         inputArray.splice(randomNumber, 1);
@@ -173,6 +171,7 @@ function createMap() {
  * markNextLocation -- looks at the next object in our itinerary array and creates a marker there. also creates a click handler on the first/current marker that will pan you to the new marker
  */
 function markNextLocation(){
+    console.log('itinerary', itinerary)
     nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
@@ -183,18 +182,17 @@ function markNextLocation(){
     startMarker.icon = 'graphics/flight.png';
     startMarker.setMap(map);
 
-
     var startMarkerListener = startMarker.addListener('click', function(){
         map.panTo(nextMarker.getPosition());
     });
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
         countriesTracker();
-        $('#trivia').modal("toggle");
+        $('#trivia').modal({backdrop: "static", keyboard: false});
         trivia_question_counter = 0;
         generate_questions();
-        startMarkerListener.remove(startMarkerListener);
-        nextMarkerListener.remove(nextMarkerListener);
+        // startMarkerListener.remove(startMarkerListener);
+        // nextMarkerListener.remove(nextMarkerListener);
 
         startMarker.icon ='graphics/checkmark-for-verification.png';
         startMarker.setMap(map);
@@ -213,11 +211,11 @@ function callGeocoder(urlString, j){
         url: urlString,
         method: 'GET',
         success: function (response) {
-            console.log('yay: ', response);
             itinerary[j].location = response.results[0]['geometry'].location;
         },
         error: function (response) {
             console.log('boo ', response);
+            callRESTCountries();
         }
     });
 }
@@ -248,6 +246,7 @@ function createItinerary(response){
         itinerary[i] = randomCountry;
     }
     for (var j = 0; j < 4; j++){
+        console.log('createItinerary', itinerary)
         var urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + itinerary[j]['capital'] + '&key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18';
         callGeocoder(urlString, j)
     }
@@ -272,7 +271,7 @@ function didWeFindHer(e){
     var herLocation = new google.maps.LatLng(itinerary[3].location.lat, itinerary[3].location.lng);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(userGuess, herLocation);
     if (distance < 500000){
-        $('#real_win').modal("toggle");
+        $('#real_win')({background: "static", keyboard: false});
         return;
     }
     else{
