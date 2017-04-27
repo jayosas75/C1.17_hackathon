@@ -15,17 +15,13 @@ $(document).ready(function(){
     $('#instructions_div').modal("toggle");
     $('#play_btn').click(function(){
         $('.post_country_win').hide();
-        console.log('markNextLocation');
         $('#instructions_div').modal("toggle");
         markNextLocation();
     });
     generateCarmenClues();
     $('.playagain_btn').click(function (){
-        console.log('reset');
-
     });
     $('.post_country_win').click(function(){
-        console.log('post_country_win hit');
         move_onto_next_country();
     });
 });
@@ -41,7 +37,6 @@ function trivia_ajax_call(){
         url: 'proxy.php?url='+encodeURI("https://www.opentdb.com/api.php?amount=50") + encodeURIComponent("&type=multiple") +encodeURIComponent("&encode=url3986") +encodeURIComponent("&category=9") ,
         method: "GET",
         success: function(results) {
-            console.log('AJAX Success function called, with the following result:', results);
             trivia_obj = results;
         },
         error: function(results){
@@ -64,9 +59,6 @@ function generate_questions() {
         answer[i] = currentQuestion.incorrect_answers[i];
     }
     answer[3] = currentQuestion.correct_answer;
-
-    console.log('this is whatever is in answer ', answer);
-    console.log('this is the question', question);
 
     trivia_question = {
         question: question,
@@ -95,16 +87,11 @@ function display_question(trivia_question) {
     console.log('this is the trivia_question as passed in ', trivia_question);
     var inputArray = $('input');
 
-    console.log('this is labelArray ', inputArray);
     $('#question').text(decodeURIComponent(trivia_question.question));
-    console.log('this should be a cleaned question string ', decodeURIComponent(trivia_question.question));
-    for (var q = 4; q > 0; q--){
+]    for (var q = 4; q > 0; q--){
         var randomNumber = Math.floor(Math.random() * q);
         $(inputArray[randomNumber]).next().text(decodeURIComponent(trivia_question.answers[q-1]));
         inputArray.splice(randomNumber, 1);
-        console.log('this is the random number ', randomNumber);
-        console.log('this is the current answer I want to shove in', trivia_question.answers[q-1]);
-        console.log('this is the current labelArray ',inputArray);
     }
 }
 
@@ -112,13 +99,9 @@ function submit_trivia_hit(){
     var userAnswer = $("input:radio:checked").next().text();
     $("input:radio:checked").attr("checked", false);
 
-    console.log('submit trivia button hit');
-    console.log('this is the userAnswer ', userAnswer);
-
     var correctAnswer = decodeURIComponent(trivia_question.answers[3]);
 
     if (userAnswer == correctAnswer) {
-        console.log('you answered correctly!');
         player_hint_counter++;
         $('.black_check').hide();
         $('.red_check').show();
@@ -131,7 +114,6 @@ function submit_trivia_hit(){
             generate_questions();
         }, 1000);
     }else {
-        console.log('you answered incorrectly!');
         $('.black_check').show();
         $('.red_check').hide();
         $('.black_x').hide();
@@ -175,7 +157,6 @@ var initialLocation = {
  * createMap -- callback function that activates as soon as the GoogleMaps is loaded. Includes object that determines initial map properties, and also places a marker on the initial starting position
  */
 function createMap() {
-    console.log('createMap was called');
     var mapProp = {
         center: new google.maps.LatLng(initialLocation.latitude, initialLocation.longitude),
         zoom: 5,
@@ -250,7 +231,6 @@ function callRESTCountries(){
         method: 'GET',
         success: function(response){
             createItinerary(response);
-            console.log('successful query of REST Countries ', response);
         },
         error: function(){
             console.log('could not reach REST Countries');
@@ -271,7 +251,6 @@ function createItinerary(response){
         var urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + itinerary[j]['capital'] + '&key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18';
         callGeocoder(urlString, j)
     }
-    console.log(itinerary);
 }
 /**
  * acceptFinalGuesses -- initiates the final mode of the game where the user can input clicks onto the map to guess where carmen sandiego is by creating a listener on the whole map for a click
@@ -281,7 +260,6 @@ function acceptFinalGuesses(){
         alert('You have entered the final phase of your investigation. Guess where Carmen Sandiego is hiding by clicking on the map!');
     }, 1000);
     map.addListener('click', function(e){
-        console.log('a guess was made!');
         didWeFindHer(e);
     });
 }
@@ -290,15 +268,10 @@ function acceptFinalGuesses(){
  * @param e
  */
 function didWeFindHer(e){
-    console.log('this is e', e);
     var userGuess = e.latLng;
     var herLocation = new google.maps.LatLng(itinerary[3].location.lat, itinerary[3].location.lng);
-    console.log('this is herLocation', herLocation);
-    console.log('this is the userGuess obj: ', userGuess);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(userGuess, herLocation);
-    console.log('this is the distance to carmen sandiego! ', distance);
     if (distance < 500000){
-        console.log('you got her!');
         $('#real_win').modal("toggle");
         return;
     }
