@@ -71,17 +71,16 @@ function generate_questions() {
 function move_onto_next_country(){
     if (itineraryIndex >= 3){
         acceptFinalGuesses();
-        $('#trivia').modal({backdrop: "static", keyboard: false});
+        $('#trivia').modal();
         return;
     }
-    $('.post_country_win').hide();
+    $('.post_country_win').modal();
     $('p').hide();
     $('.submit_btn').show();
-    $('#trivia').modal({backdrop: "static", keyboard: false});
+    $('#trivia').modal();
     reset_trivia_div_for_question();
     markNextLocation();
 }
-
 function display_question(trivia_question) {
     var inputArray = $('input');
 

@@ -6,9 +6,11 @@ body {
     font-size: 0;
     background-image: url("img/background.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     height: 100vh;
     width: 100vw;
+    min-width: 1300px;
+    min-height: 735px;
     position:relative;
 }
 .body_container {
@@ -103,10 +105,10 @@ li:nth-child(3){
 }
 .carmen{
     width: 20%;
-    margin-left: 46%;
-    margin-top: 31%;
     z-index: 1;
     position: fixed;
+    bottom: 0;
+    right: 5%; 
 }
 .modal {
     display: none; /* Hidden by default */
@@ -127,35 +129,38 @@ li:nth-child(3){
     background-size: 100%;
     margin: auto;
     width: 45%;
-    height: 65%;
+    height: 55%;
+    position:relative;
 }
 .instructions_header{
-    font-size: 6vh;
-    margin-top: 3%;
-    margin-left: 17%;
+    font-size: 2rem;
+    top: 5%;
+    left: 35%;
     position: absolute;
     font-family: "Arial Black";
 }
 .descriptions{
     position: absolute;
-    width: 25%;
+    width: 50%;
     font-size: 2vh;
-    margin-top: 10%;
-    margin-left: 4%;
+    top: 33%;
+    left: 4%;
     font-family: arial;
 }
 .running{
     position: absolute;
-    width: 55%;
-    margin-top: -30%;
-    margin-left: 104%;
+    width: 35%;
+    height: auto;
+    bottom: 0;
+    right: 0;
 }
 #play_btn {
-    margin-top: 3%;
-    margin-left: 58%;
     position: absolute;
-    width: 41%;
-    padding: 5% 10%;
+    width: 10vw;
+    height: 4vw;
+    left: 50%;
+    bottom: -5%;
+    transform: translateX(-50%);
     font-size: 3vh;
     font-family: "Arial Black";
     cursor: pointer;
