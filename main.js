@@ -82,14 +82,9 @@ function move_onto_next_country(){
     markNextLocation();
 }
 function display_question(trivia_question) {
-    var inputArray = $('input');
-
     $('#question').text(decodeURIComponent(trivia_question.question));
-    console.log('trivia_question.answers', trivia_question.answers)
     trivia_question.answers = trivia_question.answers.sort(function(){return Math.random()-0.5})
-    console.log('trivia_question.answers sorted', trivia_question.answers)
     $('input').each(function(index, domEle){
-        console.log(domEle, index, trivia_question.answers[index])
         $(domEle).next().text(decodeURIComponent(trivia_question.answers[index]))
     })
 }
