@@ -44,13 +44,13 @@ function trivia_ajax_call(){
     });
 }
 
-
 function generate_questions() {
     var answer = [];
-    var index = Math.floor((Math.random() * 50) + 1);
+    var index = Math.floor((Math.random() * (trivia_obj['results'].length)) + 1);
 
-    var currentQuestion = trivia_obj['results'][index];
-    //trivia_obj['results'][index].splice(index, 1);
+    var currentQuestion = trivia_obj['results'].splice(index, 1);
+    currentQuestion = currentQuestion[0]
+    //trivia_obj['results'][index].splice(index, 1);)
 
     var question = currentQuestion.question;
 
@@ -85,11 +85,13 @@ function display_question(trivia_question) {
     var inputArray = $('input');
 
     $('#question').text(decodeURIComponent(trivia_question.question));
-    for (var q = 4; q > 0; q--){
-        var randomNumber = Math.floor(Math.random() * q);
-        $(inputArray[randomNumber]).next().text(decodeURIComponent(trivia_question.answers[q-1]));
-        inputArray.splice(randomNumber, 1);
-    }
+    console.log('trivia_question.answers', trivia_question.answers)
+    trivia_question.answers = trivia_question.answers.sort(function(){return Math.random()-0.5})
+    console.log('trivia_question.answers sorted', trivia_question.answers)
+    $('input').each(function(index, domEle){
+        console.log(domEle, index, trivia_question.answers[index])
+        $(domEle).next().text(decodeURIComponent(trivia_question.answers[index]))
+    })
 }
 
 function submit_trivia_hit(){
@@ -241,8 +243,8 @@ function createItinerary(response){
     var countryCount = 251;
     for (var i = 0; i < 4; i++){
         var randomNumber = Math.floor(Math.random()*countryCount--);
-        var randomCountry = respons.splice(randomNumber, 1);
-        itinerary[i] = randomCountry;
+        var randomCountry = response.splice(randomNumber, 1);
+        itinerary[i] = randomCountry[0];
     }
     for (var j = 0; j < 4; j++){
         console.log('createItinerary', itinerary)
@@ -312,6 +314,7 @@ function generateCarmenClues(){
 
 function convertLangCodes(){
     for (var w = 0; w < 4; w++){
+        console.log('itinerary[w]', itinerary)
         itinerary[w]['languages'] = isoLangs[itinerary[w]['languages'][0]].name;
     }
 }
