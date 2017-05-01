@@ -128,8 +128,8 @@ li:nth-child(3){
     background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
-    width: 45%;
-    height: 55%;
+    width: 600px;
+    height: 400px;
     position:relative;
 }
 .instructions_header{
@@ -156,12 +156,12 @@ li:nth-child(3){
 }
 #play_btn {
     position: absolute;
-    width: 10vw;
-    height: 4vw;
+    width: 200px;
+    height: 75px;
     left: 50%;
-    bottom: -5%;
+    bottom: -100px;
     transform: translateX(-50%);
-    font-size: 3vh;
+    font-size: 2rem;
     font-family: "Arial Black";
     cursor: pointer;
     text-align: center;
@@ -176,7 +176,7 @@ li:nth-child(3){
 #play_btn:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    /*transform: translateY(4px);*/
 }
 .trivia {
     padding: 1% 3%;

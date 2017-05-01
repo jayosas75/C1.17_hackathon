@@ -190,9 +190,8 @@ function markNextLocation(){
         $('#trivia').modal({backdrop: "static", keyboard: false});
         trivia_question_counter = 0;
         generate_questions();
-        // startMarkerListener.remove(startMarkerListener);
-        // nextMarkerListener.remove(nextMarkerListener);
-
+        startMarkerListener.remove(startMarkerListener);
+        nextMarkerListener.remove(nextMarkerListener);
         startMarker.icon ='graphics/checkmark-for-verification.png';
         startMarker.setMap(map);
         startMarker = nextMarker;
@@ -239,9 +238,10 @@ function callRESTCountries(){
  */
 function createItinerary(response){
     console.log('createItinerary called');
+    var countryCount = 251;
     for (var i = 0; i < 4; i++){
-        var randomNumber = Math.floor(Math.random()*251);
-        var randomCountry = response[randomNumber];
+        var randomNumber = Math.floor(Math.random()*countryCount--);
+        var randomCountry = respons.splice(randomNumber, 1);
         itinerary[i] = randomCountry;
     }
     for (var j = 0; j < 4; j++){
