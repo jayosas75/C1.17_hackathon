@@ -74,18 +74,22 @@ function move_onto_next_country(){
         $('#trivia').modal();
         return;
     }
-    $('.post_country_win').modal();
-    $('p').hide();
-    $('.submit_btn').show();
-    $('#trivia').modal();
+    console.log('hey what up')
+    // $('.post_country_win').modal();
+    // $('p').hide();
+    // $('.submit_btn').show();
+    // $('#trivia').modal();
     reset_trivia_div_for_question();
     markNextLocation();
 }
 function display_question(trivia_question) {
     $('#question').text(decodeURIComponent(trivia_question.question));
-    trivia_question.answers = trivia_question.answers.sort(function(){return Math.random()-0.5})
+    var randomizedAnswers = [];
+    while (trivia_question.answers.length > 0){
+        randomizedAnswers.push(trivia_question.answers.splice(Math.floor(trivia_question.answers.length * Math.random()), 1).join())
+    }
     $('input').each(function(index, domEle){
-        $(domEle).next().text(decodeURIComponent(trivia_question.answers[index]))
+        $(domEle).next().text(decodeURIComponent(randomizedAnswers[index]))
     })
 }
 
