@@ -65,11 +65,13 @@ body {
 .status_container ul{
     list-style-type:none;
     text-align:center;
+    width: 100%;
+    padding: 0;
 }
 
 .status_container li{
     width: 100%;
-    font-size: 1 rem;
+    font-size: 1rem;
     font-family: "arial";
 }
 
@@ -320,5 +322,6 @@ ul{
     top: 0;
     width: 190px;
     height: 200px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
