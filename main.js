@@ -47,7 +47,7 @@ function generate_questions() {
     var index = Math.floor((Math.random() * (trivia_obj['results'].length)) + 1);
     var currentQuestion = trivia_obj['results'].splice(index, 1);
     currentQuestion = currentQuestion[0]
-    var question = currentQuestion.question;
+    var question = currentQuestion.question || generate_questions();
     var answer = currentQuestion.incorrect_answers.slice(0);
     answer.push(currentQuestion.correct_answer);
 
