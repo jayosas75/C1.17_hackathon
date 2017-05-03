@@ -15,14 +15,13 @@ $(document).ready(function(){
     $('#play_btn').click(function(){
         $('.post_country_win').hide();
         $('#instructions_div').hide();
+        $('#hints-div').hide();
         markNextLocation();
     });
-    generateCarmenClues();
-    $('.playagain_btn').click(function (){
-    });
-    $('.post_country_win').click(function(){
-        move_onto_next_country();
-    });
+    // $('.playagain_btn').click(function (){
+    // });
+    // $('.post_country_win').click(function(){
+    //     move_onto_next_country()});
 });
 
 var trivia_question_counter = 0;
@@ -45,19 +44,12 @@ function trivia_ajax_call(){
 }
 
 function generate_questions() {
-    var answer = [];
     var index = Math.floor((Math.random() * (trivia_obj['results'].length)) + 1);
-
     var currentQuestion = trivia_obj['results'].splice(index, 1);
     currentQuestion = currentQuestion[0]
-    //trivia_obj['results'][index].splice(index, 1);)
-
     var question = currentQuestion.question;
-
-    for (var i = 0; i < 3; i++){
-        answer[i] = currentQuestion.incorrect_answers[i];
-    }
-    answer[3] = currentQuestion.correct_answer;
+    var answer = currentQuestion.incorrect_answers.slice(0);
+    answer.push(currentQuestion.correct_answer);
 
     trivia_question = {
         question: question,
@@ -69,24 +61,26 @@ function generate_questions() {
 }
 
 function move_onto_next_country(){
+    $('#trivia').modal();
+    $('#hints-div').hide();
     if (itineraryIndex >= 3){
+        $('#trivia').hide();
         acceptFinalGuesses();
-        $('#trivia').modal();
         return;
     }
-    console.log('hey what up')
-    // $('.post_country_win').modal();
-    // $('p').hide();
-    // $('.submit_btn').show();
-    // $('#trivia').modal();
+    $('#trivia').hide();
+    $('.post_country_win').hide();
+    // $('#hints-div').hide();
+    $('.submit_btn').show();
     reset_trivia_div_for_question();
     markNextLocation();
 }
 function display_question(trivia_question) {
     $('#question').text(decodeURIComponent(trivia_question.question));
     var randomizedAnswers = [];
-    while (trivia_question.answers.length > 0){
-        randomizedAnswers.push(trivia_question.answers.splice(Math.floor(trivia_question.answers.length * Math.random()), 1).join())
+    var triviaAnswers = trivia_question.answers.slice(0);
+    while (triviaAnswers.length > 0){
+        randomizedAnswers.push(triviaAnswers.splice(Math.floor(triviaAnswers.length * Math.random()), 1).join())    
     }
     $('input').each(function(index, domEle){
         $(domEle).next().text(decodeURIComponent(randomizedAnswers[index]))
@@ -98,6 +92,7 @@ function submit_trivia_hit(){
     $("input:radio:checked").attr("checked", false);
 
     var correctAnswer = decodeURIComponent(trivia_question.answers[3]);
+    console.log('correctAnswer, yourAnswer', correctAnswer, userAnswer)
 
     if (userAnswer == correctAnswer) {
         player_hint_counter++;
@@ -171,11 +166,21 @@ function createMap() {
  * markNextLocation -- looks at the next object in our itinerary array and creates a marker there. also creates a click handler on the first/current marker that will pan you to the new marker
  */
 function markNextLocation(){
-    console.log('itinerary', itinerary)
-    nextMarker = new google.maps.Marker({
+    console.log('itinerary', itinerary, itineraryIndex)
+    if (itinerary[itineraryIndex]){
+        nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
-    });
+        });
+    }else{
+        console.log('itinerary failure', itinerary, itineraryIndex)
+        console.log('itinerary failure', itinerary[itineraryIndex])
+        nextMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(itinerary[itineraryIndex][0], itinerary[itineraryIndex][0]),
+        icon: 'graphics/magnifier.png'
+        });
+    }
+    
     if (itineraryIndex < 3) {
         nextMarker.setMap(map);
     }
@@ -188,7 +193,8 @@ function markNextLocation(){
 
     var nextMarkerListener = nextMarker.addListener('click', function(){
         countriesTracker();
-        $('#trivia').modal({backdrop: "static", keyboard: false});
+        $('#trivia').modal({backdrop: "static", keyboard: false}).show();
+
         trivia_question_counter = 0;
         generate_questions();
         startMarkerListener.remove(startMarkerListener);
@@ -245,11 +251,17 @@ function createItinerary(response){
         var randomCountry = response.splice(randomNumber, 1);
         itinerary[i] = randomCountry[0];
     }
+    if (itinerary[0] === undefined){
+        var randomNumber = Math.floor(Math.random()*countryCount--);
+        var randomCountry = response.splice(randomNumber, 1).join();
+        itinerary[0] = randomCountry[0];
+    }
     for (var j = 0; j < 4; j++){
         console.log('createItinerary', itinerary)
         var urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + itinerary[j]['capital'] + '&key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18';
         callGeocoder(urlString, j)
     }
+    generateCarmenClues();
 }
 /**
  * acceptFinalGuesses -- initiates the final mode of the game where the user can input clicks onto the map to guess where carmen sandiego is by creating a listener on the whole map for a click
@@ -271,7 +283,8 @@ function didWeFindHer(e){
     var herLocation = new google.maps.LatLng(itinerary[3].location.lat, itinerary[3].location.lng);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(userGuess, herLocation);
     if (distance < 500000){
-        $('#real_win')({background: "static", keyboard: false});
+        console.log('you win!')
+        $('#real_win').modal({background: "static", keyboard: false});
         return;
     }
     else{
@@ -328,74 +341,84 @@ function display_hints() {
     $('input').hide();
     $('label').hide();
     create_p_for_hints();
-    if (player_hint_counter === 1) {
-        $('.hints1').text(carmenCluesArray[0]);
-    } else if(player_hint_counter === 2) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-    } else if(player_hint_counter === 3) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-    } else if(player_hint_counter === 4) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-    } else if(player_hint_counter === 5) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-        $('.hints5').text(carmenCluesArray[4]);
-    } else if(player_hint_counter === 6) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-        $('.hints5').text(carmenCluesArray[4]);
-        $('.hints6').text(carmenCluesArray[5]);
-    } else if(player_hint_counter === 7) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-        $('.hints5').text(carmenCluesArray[4]);
-        $('.hints6').text(carmenCluesArray[5]);
-        $('.hints7').text(carmenCluesArray[6]);
-    } else if(player_hint_counter === 8) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-        $('.hints5').text(carmenCluesArray[4]);
-        $('.hints6').text(carmenCluesArray[5]);
-        $('.hints7').text(carmenCluesArray[6]);
-        $('.hints8').text(carmenCluesArray[7]);
-    } else if(player_hint_counter === 9) {
-        $('.hints1').text(carmenCluesArray[0]);
-        $('.hints2').text(carmenCluesArray[1]);
-        $('.hints3').text(carmenCluesArray[2]);
-        $('.hints4').text(carmenCluesArray[3]);
-        $('.hints5').text(carmenCluesArray[4]);
-        $('.hints6').text(carmenCluesArray[5]);
-        $('.hints7').text(carmenCluesArray[6]);
-        $('.hints8').text(carmenCluesArray[7]);
-        $('.hints9').text(carmenCluesArray[8]);
+    var hints = []
+    console.log('carmenCluesArray', carmenCluesArray)
+    for (var i = 0; i < player_hint_counter; i++){
+        console.log(carmenCluesArray[i])
+        hints.push($('<p></p>').text(carmenCluesArray[i]))
     }
+    console.log('hints', hints)
+    hints.reverse().map(function(p){
+        $("#hints-div").prepend(p)}) 
+    $("#hints-div").show();
+        //     $('.hints1').text(carmenCluesArray[0]);
+    // } else if(player_hint_counter === 2) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    // } else if(player_hint_counter === 3) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    // } else if(player_hint_counter === 4) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    // } else if(player_hint_counter === 5) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    //     $('.hints5').text(carmenCluesArray[4]);
+    // } else if(player_hint_counter === 6) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    //     $('.hints5').text(carmenCluesArray[4]);
+    //     $('.hints6').text(carmenCluesArray[5]);
+    // } else if(player_hint_counter === 7) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    //     $('.hints5').text(carmenCluesArray[4]);
+    //     $('.hints6').text(carmenCluesArray[5]);
+    //     $('.hints7').text(carmenCluesArray[6]);
+    // } else if(player_hint_counter === 8) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    //     $('.hints5').text(carmenCluesArray[4]);
+    //     $('.hints6').text(carmenCluesArray[5]);
+    //     $('.hints7').text(carmenCluesArray[6]);
+    //     $('.hints8').text(carmenCluesArray[7]);
+    // } else if(player_hint_counter === 9) {
+    //     $('.hints1').text(carmenCluesArray[0]);
+    //     $('.hints2').text(carmenCluesArray[1]);
+    //     $('.hints3').text(carmenCluesArray[2]);
+    //     $('.hints4').text(carmenCluesArray[3]);
+    //     $('.hints5').text(carmenCluesArray[4]);
+    //     $('.hints6').text(carmenCluesArray[5]);
+    //     $('.hints7').text(carmenCluesArray[6]);
+    //     $('.hints8').text(carmenCluesArray[7]);
+    //     $('.hints9').text(carmenCluesArray[8]);
+    // }
 }
 
 function create_p_for_hints() {
-    var new_p1 = $('<p>').addClass('hints1');
-    var new_p2 = $('<p>').addClass('hints2');
-    var new_p3 = $('<p>').addClass('hints3');
-    var new_p4 = $('<p>').addClass('hints4');
-    var new_p5 = $('<p>').addClass('hints5');
-    var new_p6 = $('<p>').addClass('hints6');
-    var new_p7 = $('<p>').addClass('hints7');
-    var new_p8 = $('<p>').addClass('hints8');
-    var new_p9 = $('<p>').addClass('hints9');
-    $('#trivia .modal-body').prepend(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
+    console.log('create_p')
+    // var new_p1 = $('<p>').addClass('hints1');
+    // var new_p2 = $('<p>').addClass('hints2');
+    // var new_p3 = $('<p>').addClass('hints3');
+    // var new_p4 = $('<p>').addClass('hints4');
+    // var new_p5 = $('<p>').addClass('hints5');
+    // var new_p6 = $('<p>').addClass('hints6');
+    // var new_p7 = $('<p>').addClass('hints7');
+    // var new_p8 = $('<p>').addClass('hints8');
+    // var new_p9 = $('<p>').addClass('hints9');
+    // $('#trivia .modal-body').prepend(new_p1, new_p2, new_p3, new_p4, new_p5, new_p6, new_p7, new_p8, new_p9);
 }
 
 function reset_trivia_div_for_question(){
