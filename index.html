@@ -72,55 +72,59 @@
     </div>
 
         <!-- Modal for Real Win-->
-        <div id="real_win" class="modal" role="dialog" data-toggle="modal">
+        <div id="real_win" class="modal styled-modal" role="dialog" data-toggle="modal">
             <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">You caught Carmen Sandiego! The police now have her in custody thanks to you!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Thanks for playing the game and catching this international criminal.</p>
-                    </div>
-                    <div class="modal-start">
-                        <button type="button" class="btn btn-primary close" data-dismiss="modal" data-dismiss="modal">Play again!</button>
-                    </div>
-             </div>
-            </div>
-        </div>
-
-        <!-- Modal for Losers-->
-        <div id="country_lose" class="modal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                < class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">You can't follow her to this country!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>You were not able to answer enough trivia correctly. Don't worry, try again.</p>
-                    </div>
-                    <div class="modal-start">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Try again.</button>
+                <div class="modal-body">
+                    <h4 class="modal-title">You caught Carmen Sandiego! The police now have her in custody thanks to you!</h4>
+                    <p>Thanks for playing the game and catching this international criminal!</p>
+                    <button type="button" onClick="reloadPage()">Play again!</button>
                 </div>
             </div>
         </div>
-
-    <!-- Modal for Win Condition-->
-    <div id='win_div' class="modal">
-        <div class="win">
-            <button class="playagain_btn">PLAY AGAIN</button>
+<!-- Final Phase Notification -->
+<div id="final-phase" class="modal fade styled-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <p>You have entered the final phase of your investigation. Use the clues you've gathered to find Carmen Sandiego and clicking directly on the map!</p>
+        <img src="img/magnifyingglass.jpg" alt="magnifying glass">
+        <div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
         </div>
     </div>
+  </div>
+</div>
 
-    <!-- Modal for Lose Condition-->
-    <div id='lose_div' class="modal">
-        <div class="lose">
-            <button class="playagain_btn">PLAY AGAIN</button>
+<!-- Wrong Guess Notification -->
+<div id="wrong-guess" class="modal fade styled-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <p></p>
+        <img src="img/magnifyingglass.jpg" alt="magnifying glass">
+        <div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
         </div>
     </div>
+  </div>
+</div>
+
+<!-- Loss Notification -->
+<div id="loss-modal" class="modal fade styled-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <p></p>
+        <img src="img/magnifyingglass.jpg" alt="magnifying glass">
+        <div>
+            <button type="button" class="btn btn-default" onClick="reloadPage()">Try Again!</button>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

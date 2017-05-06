@@ -291,17 +291,17 @@ body {
     margin: 0;
     padding: 0;
 }
-
-#real_win{
-    font-size: 0;
+#real_win .modal-body{
     background-image: url("img/win_condition.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+    width: 600px;
+    height: 400px;
     margin: auto;
-    width: 45%;
-    height: 70%;
-    position:absolute;
-    left:25%;
+}
+#real_win h4, #real_win p{
+    padding-top: 100px;
+    color: wheat;
 }
 
 p{
@@ -324,4 +324,41 @@ ul{
     height: 235px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.styled-modal .modal-body{
+    padding: 1% 3%;
+    background-image: url(img/modal_background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: auto;
+    width: 600px;
+    height: 400px;
+    color: initial;
+    text-align: center;
+}
+.styled-modal .modal-body p{
+    font-size: 1.5rem;
+}
+
+.styled-modal .modal-body img{
+    width: 35%;
+    height: auto;
+}
+.styled-modal .modal-body button{
+    font-size: 2rem;
+    font-family: "Arial Black";
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    box-shadow: 0 9px #999;
+    padding: .5em;
+}
+.styled-modal .modal-body button:hover {background-color: #3e8e41}
+.styled-modal .modal-body button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
 }
