@@ -153,7 +153,9 @@ function createMap() {
     var mapProp = {
         center: new google.maps.LatLng(initialLocation.latitude, initialLocation.longitude),
         zoom: 5,
-        disableDefaultUI: true
+        zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
     };
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     startMarker = new google.maps.Marker({
@@ -268,7 +270,7 @@ function createItinerary(response){
 function acceptFinalGuesses(){
     setTimeout(function(){
         $("#final-phase").modal({backdrop: "static", keyboard: false});
-    }, 1000);
+    }, 500);
     map.addListener('click', function(e){
         didWeFindHer(e);
     });
