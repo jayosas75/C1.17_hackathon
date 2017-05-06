@@ -64,7 +64,7 @@ function move_onto_next_country(){
     $('#trivia').modal();
     $('#hints-div').hide();
     //REMEMBER TO CHANGE THIS BACK TO 3
-    if (itineraryIndex >= 1){
+    if (itineraryIndex >= 3){
         $('#trivia').hide();
         acceptFinalGuesses();
         return;
@@ -93,7 +93,6 @@ function submit_trivia_hit(){
     $("input:radio:checked").attr("checked", false);
 
     var correctAnswer = decodeURIComponent(trivia_question.answers[3]);
-    console.log('correctAnswer, yourAnswer', correctAnswer, userAnswer)
 
     if (userAnswer == correctAnswer) {
         player_hint_counter++;
@@ -167,15 +166,12 @@ function createMap() {
  * markNextLocation -- looks at the next object in our itinerary array and creates a marker there. also creates a click handler on the first/current marker that will pan you to the new marker
  */
 function markNextLocation(){
-    console.log('itinerary', itinerary, itineraryIndex)
     if (itinerary[itineraryIndex].location){
         nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].location.lat, itinerary[itineraryIndex].location.lng),
         icon: 'graphics/magnifier.png'
         });
     }else{
-        console.log('itinerary failure', itinerary, itineraryIndex)
-        console.log('itinerary failure', itinerary[itineraryIndex])
         nextMarker = new google.maps.Marker({
         position: new google.maps.LatLng(itinerary[itineraryIndex].latlng[0], itinerary[itineraryIndex].latlng[0]),
         icon: 'graphics/magnifier.png'
@@ -218,7 +214,6 @@ function callGeocoder(urlString, j){
         method: 'GET',
         success: function (response) {
             itinerary[j].location = response.results[0]['geometry'].location;
-            console.log('itinerary[j].location', itinerary[j].location)
             if (j === 3){
                 markNextLocation(); 
             }
@@ -250,7 +245,6 @@ function callRESTCountries(){
  * createItinerary -- randomly picks four countries from the countriesArray  pulles from RESTCountries
  */
 function createItinerary(response){
-    console.log('createItinerary called');
     var countryCount = 251;
     for (var i = 0; i < 4; i++){
         var randomNumber = Math.floor(Math.random()*countryCount--);
@@ -263,7 +257,6 @@ function createItinerary(response){
         itinerary[0] = randomCountry[0];
     }
     for (var j = 0; j < 4; j++){
-        console.log('createItinerary', itinerary)
         var urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + itinerary[j]['capital'] + '&key=AIzaSyAmKMy1-y559dRSIp5Kjx6gYuTp0qedv18';
         callGeocoder(urlString, j)
     }
@@ -330,12 +323,10 @@ function generateCarmenClues(){
     for (var q = 0; q < 9 ; q++) {
         carmenCluesArray[q] = clueTemplateArray[q];
     }
-    console.log('Carmen Clues! ', carmenCluesArray);
 }
 
 function convertLangCodes(){
     for (var w = 0; w < 4; w++){
-        console.log('itinerary[w]', itinerary)
         itinerary[w]['languages'] = isoLangs[itinerary[w]['languages'][0]].name;
     }
 }
@@ -350,9 +341,7 @@ function display_hints() {
     $('input').hide();
     $('label').hide();
     var hints = []
-    console.log('carmenCluesArray', carmenCluesArray)
     for (var i = 0; i < player_hint_counter; i++){
-        console.log(carmenCluesArray[i])
         hints.push($('<p></p>').text(carmenCluesArray[i]))
     }
     console.log('hints', hints)
