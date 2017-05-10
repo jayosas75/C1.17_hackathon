@@ -9,9 +9,10 @@ body {
     background-size: cover;
     height: 100vh;
     width: 100vw;
-    min-width: 1536px;
-    min-height: 735px;
+    min-width: 1366px;
+    min-height: 768px;
     position:relative;
+    overflow-y: hidden;
 }
 .body_container {
     margin-top: 5%;

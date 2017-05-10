@@ -268,6 +268,8 @@ function createItinerary(response){
  * acceptFinalGuesses -- initiates the final mode of the game where the user can input clicks onto the map to guess where carmen sandiego is by creating a listener on the whole map for a click
  */
 function acceptFinalGuesses(){
+    startMarker.icon ='graphics/checkmark-for-verification.png';
+    nextMarker.icon ='graphics/checkmark-for-verification.png';
     setTimeout(function(){
         $("#final-phase").modal({backdrop: "static", keyboard: false});
     }, 500);
